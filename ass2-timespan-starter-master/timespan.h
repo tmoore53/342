@@ -1,5 +1,9 @@
 //
-// Created by Yusuf Pisan on 4/2/18.
+// Created by Tyler Moore
+// 10/13/21
+// Header class for TimeSpan class
+// represents a duration in hours,
+// minutes and seconds.
 //
 
 #ifndef ASS2_TIMESPAN_H
@@ -9,12 +13,13 @@
 
 using namespace std;
 
-class TimeSpan {
+class TimeSpan
+{
   friend ostream &operator<<(ostream &out, const TimeSpan &ts);
 
 public:
   // explicit TimeSpan(int Hour = 0, int Minute = 0, int Second = 0);
-  explicit TimeSpan(double hour = 0, double minute = 0, double second = 0);
+  TimeSpan(double hour, double minute, double second);
 
   // add
   TimeSpan operator+(const TimeSpan &ts) const;
@@ -33,6 +38,14 @@ public:
 
   // TODO(student)
   // to add operator+=, operator-=, operator<, operator>, operator<=, operator>=
+  //Done.
+
+  TimeSpan &operator+=(const TimeSpan &ts);
+  TimeSpan &operator-=(const TimeSpan &ts);
+  bool operator<(const TimeSpan &ts);
+  bool operator>(const TimeSpan &ts);
+  bool operator<=(const TimeSpan &ts);
+  bool operator>=(const TimeSpan &ts);
 
   // hour component of timespan
   int getHour() const;
@@ -46,7 +59,18 @@ public:
   // true if timespan is 0 or larger
   bool isPositive() const;
 
+  bool isNegative() const;
+
 private:
+  double decimaltrn(double &num);
+
+  void setHour(const double &hr);
+  void setMin(const double &min);
+  void setSec(const double &sec);
+
+  double _Hour;
+  double _Minute;
+  double _Second;
 };
 
 #endif // ASS2_TIMESPAN_H
