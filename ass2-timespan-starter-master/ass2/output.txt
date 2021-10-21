@@ -1,0 +1,31 @@
+Sun 17 Oct 2021 08:53:32 PM PDT
+*** compiling with clang++ to create an executable called myprogram
+clang version 7.0.1-8+deb10u2 (tags/RELEASE_701/final)
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+LLVM (http://llvm.org/):
+  LLVM version 7.0.1
+  
+  Optimized build.
+  Default target: x86_64-pc-linux-gnu
+  Host CPU: skylake-avx512
+*** running myprogram
+ts0 00:00:00
+ts1 00:00:10
+ts2 -00:00:10
+01:20:30
+test1 complete
+test2 complete
+test3 complete
+02:41:00
+ts 42:56:00
+ts2 01:20:30
+41:35:30
+test4 complete
+ts0 00:40:30
+ts1 -00:39:30
+ts2 01:19:30
+Done.
+*** cleaning up, deleting myprogram
+Sun 17 Oct 2021 08:53:40 PM PDT
