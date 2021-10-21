@@ -1,0 +1,71 @@
+Tue Oct 15 15:10:31 PDT 2019
+*** compiling with clang++ to create an executable called myprogram
+clang version 9.0.0 (tags/RELEASE_900/final)
+Target: x86_64-apple-darwin16.7.0
+Thread model: posix
+InstalledDir: /Users/pisan/homebrew/opt/llvm/bin
+*** running clang-tidy using options from .clang-tidy
+LLVM (http://llvm.org/):
+  LLVM version 9.0.0
+  Optimized build.
+  Default target: x86_64-apple-darwin16.7.0
+  Host CPU: skylake
+12764 warnings generated.
+25741 warnings generated.
+40530 warnings generated.
+/Users/pisan/bitbucket/pisan342/ass3-maze/creature.h:21:22: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
+  string solve(Maze &Maze);
+                     ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/creature.h:23:24: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
+  string goNorth(Maze &Maze);
+                       ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/creature.h:24:24: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
+  string goSouth(Maze &Maze);
+                       ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/creature.h:25:23: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
+  string goEast(Maze &Maze);
+                      ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/creature.h:26:23: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
+  string goWest(Maze &Maze);
+                      ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:5:1: warning: #includes are not sorted properly [llvm-include-order]
+#include <fstream>
+^        ~~~~~~~~~
+         "maze.h"
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:14:14: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
+      Out << Maze.Field[Row][Col];
+             ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:26:1: warning: constructor does not initialize these fields: Field, Width, Height, ExitRow, ExitColumn [cppcoreguidelines-pro-type-member-init]
+Maze::Maze(const string &FileName) {
+^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:39:18: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
+      InFile.get(Field[Row][Col]);
+                 ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:56:10: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
+  return Field[Row][Col] == ' ';
+         ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:60:3: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
+  Field[Row][Col] = '*';
+  ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.cpp:64:3: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
+  Field[Row][Col] = '+';
+  ^
+/Users/pisan/bitbucket/pisan342/ass3-maze/maze.h:18:3: warning: do not declare C-style arrays, use std::array<> instead [hicpp-avoid-c-arrays]
+  char Field[MAX_SIZE][MAX_SIZE];
+  ^
+Suppressed 40489 warnings (40489 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+*** running myprogram
+Path: EEENNNEEEEEESEESSSEEENNNNN
+xxxxxxxxxxxxxxxxxx*x
+x     x*******xxxx*x
+x xxxxx*xxxxx***xx*x
+x xxxxx*xxxxxxx*xx*x
+x x+ ***+++++xx*xx*x
+x xxxxxxxxxx+xx****x
+xxxxxxxxxxxxxxxxxxxx
+
+
+Done!
+*** cleaning up, deleting myprogram
+Tue Oct 15 15:10:53 PDT 2019
