@@ -7,22 +7,24 @@
 #include "maze.h"
 #include <ostream>
 
-class Creature {
+class Creature
+{
 public:
   friend ostream &operator<<(ostream &Out, const Creature &Creature);
 
 private:
   int Row;
   int Col;
+  string move(const int row, const int col);
 
 public:
   Creature(int Row, int Col);
-  string solve(Maze &Maze);
+  string solve(const Maze &Maze);
   bool atExit(const Maze &Maze) const;
-  string goNorth(Maze &Maze);
-  string goSouth(Maze &Maze);
-  string goEast(Maze &Maze);
-  string goWest(Maze &Maze);
+  string goNorth(const Maze &Maze);
+  string goSouth(const Maze &Maze);
+  string goEast(const Maze &Maze);
+  string goWest(const Maze &Maze);
 };
 
 #endif //ASS3_CREATURE_H
