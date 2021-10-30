@@ -5,11 +5,12 @@
 
 
 void test() {
-    Maze M("maze.txt");
+    Maze M("maze2.txt");
     // cout << m << endl;
     Creature C(4, 4);
     cout << "Path: " << C.solve(M) << endl;
     cout << M << endl;
+    cout << C << endl;
 }
 int main() {
     test();
