@@ -58,6 +58,9 @@ private:
 
   // books in library
   string Books[MAX];
+
+
+  
 };
 
 // insertion operator, so we can use "cout << lib"

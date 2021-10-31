@@ -1,5 +1,13 @@
+//
+// Author: Tyler A. Moore
+//
+// Created: October 28, 2021
+//
+// Creature Main method to demonstrate how to
+// recursively ttraverse a maze and return the
+// path taken
+//
 #include <iostream>
-
 #include "creature.h"
 #include "maze.h"
 
@@ -10,12 +18,13 @@ void test()
     Maze M3("maze3.txt");
     Maze M4("maze4.txt");
 
-    // cout << m << endl;
     Creature C(4, 4);
     Creature C2(4, 4);
     Creature C3(4, 4);
     Creature C4(4, 4);
 
+    /*Modified to fix google syntax errors
+ Added & next to each Map */
     cout << "Path: " << C.solve(&M) << endl;
     cout << M << endl;
 

@@ -5,13 +5,15 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <stack>
 
 using namespace std;
 
 // forward delaration, defined in library-commands.cpp
 void execute_commands(const string &filename);
 
-void test1() {
+void test1()
+{
   Library lib;
   stringstream ss;
   // NOLINTNEXTLINE - would normally use empty
@@ -22,7 +24,8 @@ void test1() {
   cout << "test1 complete" << endl;
 }
 
-void test2() {
+void test2()
+{
   Library lib;
   stringstream ss;
   lib.push_back("Ulysses");
@@ -36,7 +39,8 @@ void test2() {
   cout << "test2 complete" << endl;
 }
 
-void test3() {
+void test3()
+{
   Library lib;
   stringstream ss;
   lib.push_back("Ulysses");
@@ -56,7 +60,8 @@ void test3() {
   cout << "test3 complete" << endl;
 }
 
-void test4() {
+void test4()
+{
   Library lib;
   stringstream ss;
   lib.push_back("Ulysses");
@@ -72,17 +77,46 @@ void test4() {
   cout << "test4 complete" << endl;
 }
 
-int main(int argc, char *argv[]) {
-  test1();
-  test2();
-  test3();
-  test4();
-  if (argc >= 1) {
-    for (int i = 1; i < argc; ++i) {
-      string commandFile = argv[i];
-      cout << "*** Executing commands from " << commandFile << endl;
-      execute_commands(commandFile);
-    }
+string revString(string &str)
+{
+  stack<char> St;
+  string returnStr;
+  for (char c : str)
+  {
+    St.push(c);
   }
+  while (!St.empty())
+  {
+    returnStr += St.top();
+    St.pop();
+  }
+  return returnStr;
+}
+
+int main(int argc, char *argv[])
+{
+
+  string test = "Hello World";
+
+  cout << test << endl;
+
+  test = revString(test);
+
+  cout << test << endl;
+  test = revString(test);
+
+  cout << test << endl;
+
+  // test1();
+  // test2();
+  // test3();
+  // test4();
+  // if (argc >= 1) {
+  //   for (int i = 1; i < argc; ++i) {
+  //     string commandFile = argv[i];
+  //     cout << "*** Executing commands from " << commandFile << endl;
+  //     execute_commands(commandFile);
+  //   }
+  // }
   cout << "Done." << endl;
 }
