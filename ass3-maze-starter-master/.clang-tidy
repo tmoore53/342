@@ -6,13 +6,7 @@
 #
 ---
 # See https://clang.llvm.org/extra/clang-tidy/#using-clang-tidy for all possible checks
-Checks: '*,-fuchsia-*,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,
--google-readability-braces-around-statements,-google-build-using-namespace,
--readability-braces-around-statements,-hicpp-no-array-decay,
--modernize-use-trailing-return-type,-hicpp-braces-around-statements,
--cppcoreguidelines-pro-bounds-pointer-arithmetic,-llvm-header-guard,
--google-global-names-in-headers,-cppcoreguidelines-special-member-functions,
--hicpp-special-member-functions,-cppcoreguidelines-owning-memory'
+Checks: '*,-fuchsia-*,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-google-readability-braces-around-statements,-google-build-using-namespace,-readability-braces-around-statements,-hicpp-no-array-decay,-modernize-use-trailing-return-type,-hicpp-braces-around-statements,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-llvm-header-guard,-google-global-names-in-headers,-cppcoreguidelines-special-member-functions,-hicpp-special-member-functions,-cppcoreguidelines-owning-memory,-system-headers,-header-filter=.*'
 
 # Removed
 # 

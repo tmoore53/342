@@ -9,29 +9,53 @@
 #include "creature.h"
 #include <iostream>
 #include <stack>
-using namespace std;
+using std::string;
 
 /* Operator overload to print out the starting location of the creature*/
-std::ostream &operator<<(std::ostream &Out, const Creature &Creature)
+std::ostream &operator<<(std::ostream &out, const Creature &creature)
 {
-    return Out << "Creature started at [" << Creature.Row << "," << Creature.Col << "]";
+    return out << "Creature started at [" << creature.Row << "," << creature.Col << "]";
 }
 
 /* Creature constructor
    initializes the location of the creature in the maze and 
    sets the value of being found to false
 */
-Creature::Creature(int Row, int Col) : Row(Row), Col(Col), Found(false) {}
+Creature::Creature(int row, int col) : Row(row), Col(col), Found(false) {}
 
 //Method returns path in the form of a string
 //Remove int Row, int Col
 //add and impliment another function
-string Creature::solve(Maze &Maze)
+string Creature::solve(Maze *maze)
 {
-    mover(&Maze, Row, Col);
+    mover(maze, Row, Col);
+    Path = revString(Path);
+
     return Path;
 }
 
+  string Creature::revString(const string &str){
+      if(str.length() < 1)
+        return str;
+  stack<char> St;
+  string ReturnStr;
+  for (char C : str)
+  {
+    St.push(C);
+  }
+  while (!St.empty())
+  {
+    ReturnStr += St.top();
+    St.pop();
+  }
+  return ReturnStr;
+  }
+
+
+
+// Recursive method that traverses the maze to find the 
+// end. Once Found it marks the path to get to the end.
+// 
 bool Creature::mover(Maze *maze, int row, int col)
 {
 
@@ -106,24 +130,24 @@ bool Creature::mover(Maze *maze, int row, int col)
     return ExitFound;
 }
 
-string Creature::goNorth(Maze &Maze)
+string Creature::goNorth(Maze *maze)
 {
-    if (Maze.isClear(Row - 1, Col))
+    if (maze->isClear(Row - 1, Col))
     {
         Row = Row - 1;
-        Maze.markAsVisited(Row, Col);
+        maze->markAsVisited(Row, Col);
         return "W";
     }
     cout << "Can't move to the North!" << endl;
     return "";
 }
 
-string Creature::goWest(Maze &Maze)
+string Creature::goWest(Maze *maze)
 {
-    if (Maze.isClear(Row, Col - 1))
+    if (maze->isClear(Row, Col - 1))
     {
         Col = Col - 1;
-        Maze.markAsVisited(Row, Col);
+        maze->markAsVisited(Row, Col);
         return "W";
     }
     cout << "Can't move to the West!" << endl;
@@ -131,39 +155,39 @@ string Creature::goWest(Maze &Maze)
     return "";
 }
 
-string Creature::goEast(Maze &Maze)
+string Creature::goEast(Maze *maze)
 {
-    if (Maze.isClear(Row, Col + 1))
+    if (maze->isClear(Row, Col + 1))
     {
         Col = Col + 1;
-        Maze.markAsVisited(Row, Col);
+        maze->markAsVisited(Row, Col);
         return "E";
     }
     cout << "Can't move to the East!" << endl;
 
     return "";
 }
-string Creature::goSouth(Maze &Maze)
+string Creature::goSouth(Maze *maze)
 {
-    if (Maze.isClear(Row + 1, Col))
+    if (maze->isClear(Row + 1, Col))
     {
         Row = Row + 1;
-        Maze.markAsVisited(Row, Col);
+        maze->markAsVisited(Row, Col);
         return "S";
     }
     cout << "Can't move to the South!" << endl;
 
     return "";
 }
-bool Creature::atExit(const Maze &Maze) const
+bool Creature::atExit(const Maze &maze) const
 {
 
-    return checkAtExit(Maze, this->Row, this->Col);
+    return checkAtExit(maze, this->Row, this->Col);
 }
 
-bool Creature::checkAtExit(const Maze &Maze, const int &row, const int &col) const
+bool Creature::checkAtExit(const Maze &maze, const int &row, const int &col) const
 {
-    return row == Maze.getExitRow() && col == Maze.getExitColumn();
+    return row == maze.getExitRow() && col == maze.getExitColumn();
 }
 
 int Creature::getRow() const

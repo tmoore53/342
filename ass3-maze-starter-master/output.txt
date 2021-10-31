@@ -1,4 +1,4 @@
-Sat 30 Oct 2021 12:34:06 AM PDT
+Sat 30 Oct 2021 11:54:43 PM PDT
 *** compiling with clang++ to create an executable called myprogram
 clang version 7.0.1-8+deb10u2 (tags/RELEASE_701/final)
 Target: x86_64-pc-linux-gnu
@@ -11,61 +11,11 @@ LLVM (http://llvm.org/):
   Optimized build.
   Default target: x86_64-pc-linux-gnu
   Host CPU: skylake-avx512
-7304 warnings generated.
-14050 warnings generated.
-21536 warnings generated.
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:28:22: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string solve(Maze &Maze);
-                     ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:30:24: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goNorth(Maze &Maze);
-                       ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:31:24: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goSouth(Maze &Maze);
-                       ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:32:23: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goEast(Maze &Maze);
-                      ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:33:23: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goWest(Maze &Maze);
-                      ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:28:22: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string solve(Maze &Maze);
-                     ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:30:24: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goNorth(Maze &Maze);
-                       ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:31:24: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goSouth(Maze &Maze);
-                       ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:32:23: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goEast(Maze &Maze);
-                      ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/creature.h:33:23: warning: non-const reference parameter 'Maze', make it const or use a pointer [google-runtime-references]
-  string goWest(Maze &Maze);
-                      ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/maze.cpp:15:14: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
-      Out << Maze.Field[Row][Col];
-             ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/maze.cpp:27:1: warning: constructor does not initialize these fields: Field, Width, Height, ExitRow, ExitColumn [cppcoreguidelines-pro-type-member-init]
-Maze::Maze(const string &FileName)
-^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/maze.cpp:44:18: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
-      InFile.get(Field[Row][Col]);
-                 ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/maze.cpp:63:10: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
-  return Field[Row][Col] == ' ';
-         ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/maze.cpp:68:3: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
-  Field[Row][Col] = '*';
-  ^
-/home/NETID/tmoore53/Assignments/342/ass3-maze-starter-master/maze.cpp:73:3: warning: do not use array subscript when the index is not an integer constant expression; use gsl::at() instead [cppcoreguidelines-pro-bounds-constant-array-index]
-  Field[Row][Col] = '+';
-  ^
-Suppressed 21514 warnings (21514 in non-user code).
+7446 warnings generated.
+Suppressed 7446 warnings (7446 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 *** running myprogram
-Path: NNNNNEEESSSEESEEEEEENNNEEE
+Path: EEENNNEEEEEESEESSSEEENNNNN
 xxxxxxxxxxxxxxxxxx*x
 x     x*******xxxx*x
 x xxxxx*xxxxx***xx*x
@@ -75,7 +25,63 @@ x xxxxxxxxxx xx****x
 xxxxxxxxxxxxxxxxxxxx
 
 
+Path: EEENNNEEEEEESEESSSEEENNNNEEEEEEEEESSEENEEEEEEEESSSEEEEEEENNEEENEESSSEEEEEEEENNWWWWWNWNN
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
+x     x*******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
+x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x**xxxxxxx
+x xxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x ******xx
+x x ****     xx*xx*xxxxxxxxxx x      *xxxxxx*xxxx*xxxxxxx*xx
+x xxxxxxxxxx xx****x          x      ********xxxx*********xx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+Path: EEENNNEEEEEESEESSSEEENNNNEEEEEEEEESSEENEEEEEEEESSSEEEEEEENNEEENEESSSEESSSSSEEEEEESSWWWWWWWWNNNWWSWWWSSWWWWWWWNNNWWWWWWWWSWWNNNWSWNWSWNWSWNWSWNWSSSSSWWWNNNWWNWWWWWWSSSWWWWWWSS
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x      *******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x  xxxxxxx
+x xxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x       xx
+x x ****     xx*xx*xxxxxxxxxx x      *xxxxxx*xxxx*xxxxxxx xx
+x xxxxxxxxxx xx****x          x xxxxx********xxxx***      xx
+x xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
+xxxxxxxxxxxxxxxxxx**********xxxxxxxxx              *xxxxxxxx
+x      *******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
+x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x*+xxxxxxx
+xxxxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x*******xx
+x*******+++++xx*xx*xxxxxxxxxx+x      *xxxxxx*xxxx*xxxxxxx*xx
+x*xxxxxxxxxx+xx****x++++++++++x xxxxx********xxxx*********xx
+x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+Path: EEENNNEEEEEESEESSSEEENNNNEEEEEEEEESSEENEEEEEEEESSSEEEEEEENNEEENEESSSEESSSSSEEEEEESSWWWWWWWWNNNWWSWWWSSWWWWWWWNNNWWWWWWWWSWWNNNWSWNWSWNWSWNWSWNWSSSSSWWWNNNWWNWWWWWWSSSWWWWWWSSSSEEEEEESSSWWWWWWSS
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x      *******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x  xxxxxxx
+x xxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x       xx
+x x ****     xx*xx*xxxxxxxxxx x      *xxxxxx*xxxx*xxxxxxx xx
+x xxxxxxxxxx xx****x          x xxxxx********xxxx***      xx
+x xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
+xxxxxxxxxxxxxxxxxx**********xxxxxxxxx              *xxxxxxxx
+x      *******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
+x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x*+xxxxxxx
+xxxxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x*******xx
+x*******+++++xx*xx*xxxxxxxxxx+x      *xxxxxx*xxxx*xxxxxxx*xx
+x*xxxxxxxxxx+xx****x++++++++++x xxxxx********xxxx*********xx
+x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx               xxxxxxxx
+x*******      xxxx          x xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+x+xxxxx*xxxxx   xx xxxxxxxx x         xxxxxxxxx   x  xxxxxxx
+xxxxxxx*xxxxxxx xx xxxxxxxx   xxxxxxx xx        x x       xx
+x*******+++++xx xx xxxxxxxxxx x       xxxxxx xxxx xxxxxxx xx
+x*xxxxxxxxxx+xx    x          x xxxxx        xxxx         xx
+x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+Creature started at [4,4]
+Creature started at [4,4]
+Creature started at [4,4]
 Creature started at [4,4]
 Done!
+*** running with valgrind
+valgrind: ./myprogram.exe: No such file or directory
 *** cleaning up, deleting myprogram
-Sat 30 Oct 2021 12:34:14 AM PDT
+Sat 30 Oct 2021 11:54:53 PM PDT

@@ -1,8 +1,8 @@
 //
 //
 
-#ifndef ASS3_CREATURE_H
-#define ASS3_CREATURE_H
+#ifndef _HOME_NETID_TMOORE53_ASSIGNMENTS_342_ASS3_MAZE_STARTER_MASTER_CREATURE_H
+#define _HOME_NETID_TMOORE53_ASSIGNMENTS_342_ASS3_MAZE_STARTER_MASTER_CREATURE_H
 
 #include "maze.h"
 #include <ostream>
@@ -10,31 +10,31 @@
 class Creature
 {
 public:
-  friend ostream &operator<<(ostream &Out, const Creature &Creature);
+  friend ostream &operator<<(ostream &out, const Creature &Creature);
 
 private:
   int Row;
   int Col;
   bool Found;
 
-  string revString(string str);
-  bool mover(Maze *Maze, int Row, int Col);
-  bool checkAtExit(const Maze &Maze, const int &row, const int &col) const;
+  string revString(const string &str);
+  bool mover(Maze *maze, int row, int col);
+  bool checkAtExit(const Maze &maze, const int &row, const int &col) const;
 
   string Path;
 
 public:
-  Creature(int Row, int Col);
-  string solve(Maze &Maze);
-  bool atExit(const Maze &Maze) const;
-  string goNorth(Maze &Maze);
-  string goSouth(Maze &Maze);
-  string goEast(Maze &Maze);
-  string goWest(Maze &Maze);
+  Creature(int row, int col);
+  string solve(Maze *maze);
+  bool atExit(const Maze &maze) const;
+  string goNorth(Maze *maze);
+  string goSouth(Maze *maze);
+  string goEast(Maze *maze);
+  string goWest(Maze *maze);
 
   //Getters
   int getRow() const;
   int getCol() const;
 };
 
-#endif //ASS3_CREATURE_H
+#endif //_HOME_NETID_TMOORE53_ASSIGNMENTS_342_ASS3_MAZE_STARTER_MASTER_CREATURE_H
