@@ -1,4 +1,4 @@
-Sat 30 Oct 2021 11:54:43 PM PDT
+Sun 31 Oct 2021 05:06:14 PM PDT
 *** compiling with clang++ to create an executable called myprogram
 clang version 7.0.1-8+deb10u2 (tags/RELEASE_701/final)
 Target: x86_64-pc-linux-gnu
@@ -25,13 +25,13 @@ x xxxxxxxxxx xx****x
 xxxxxxxxxxxxxxxxxxxx
 
 
-Path: EEENNNEEEEEESEESSSEEENNNNEEEEEEEEESSEENEEEEEEEESSSEEEEEEENNEEENEESSSEEEEEEEENNWWWWWNWNN
+Path: WWWNNNEEEEEESEESSSEEENNNNEEEEEEEEESSEENEEEEEEEESSSEEEEEEENNEEENEESSSEEEEEEEENNWWWWWNWNN
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
 x     x*******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
 x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x**xxxxxxx
 x xxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x ******xx
-x x ****     xx*xx*xxxxxxxxxx x      *xxxxxx*xxxx*xxxxxxx*xx
-x xxxxxxxxxx xx****x          x      ********xxxx*********xx
+x x    ****++xx*xx*xxxxxxxxxx x      *xxxxxx*xxxx*xxxxxxx*xx
+x xxxxxxxxxx+xx****x          x      ********xxxx*********xx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
@@ -52,36 +52,36 @@ x*xxxxxxxxxx+xx****x++++++++++x xxxxx********xxxx*********xx
 x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
-Path: EEENNNEEEEEESEESSSEEENNNNEEEEEEEEESSEENEEEEEEEESSSEEEEEEENNEEENEESSSEESSSSSEEEEEESSWWWWWWWWNNNWWSWWWSSWWWWWWWNNNWWWWWWWWSWWNNNWSWNWSWNWSWNWSWNWSSSSSWWWNNNWWNWWWWWWSSSWWWWWWSSSSEEEEEESSSWWWWWWSS
+Path: EEEEEEEEEEEEESSSEEEEEESSWWWWWWWWNNNWWSWWWSSWWWWWWWNNNWWWWWWWWSWWNNWWWWWWWWWSSSSWWWNNNWWNWWWWWWSSSWWWWWWSS
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-x      *******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
-x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x  xxxxxxx
-x xxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x       xx
-x x ****     xx*xx*xxxxxxxxxx x      *xxxxxx*xxxx*xxxxxxx xx
-x xxxxxxxxxx xx****x          x xxxxx********xxxx***      xx
-x xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
-xxxxxxxxxxxxxxxxxx**********xxxxxxxxx              *xxxxxxxx
+x             xxxx          x xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+x xxxxx xxxxx   xx xxxxxxxx x         xxxxxxxxx   x  xxxxxxx
+x xxxxx xxxxxxx xx x          xxxxxxx xx        x x       xx
+x x          xx xx xxxxxxxxxx x       xxxxxx xxxx xxxxxxx xx
+x xxxxxxxxxx xx    x          x xxxxx        xxxx         xx
+x xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+xxxxxxxxxxxxxxxxxx          xxxxxxxxx               xxxxxxxx
+x             xxxx          x xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+x xxxxx xxxxx   xx xxxxxxxx x         xxxxxxxxx   x  xxxxxxx
+xxxxxxx xxxxxxx xx x          xxxxxxx xx        x x       xx
+x            xx xx xxxxxxxxxx x       xxxxxx xxxx xxxxxxx xx
+x xxxxxxxxxx xx    x          x xxxxx        xxxx         xx
+x xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **************xxxxxxxx
 x      *******xxxx**********x+xxxxxxxxxxxxxxxxxxxxx*xxxxxxxx
 x xxxxx*xxxxx***xx*xxxxxxxx*x*********xxxxxxxxx***x*+xxxxxxx
-xxxxxxx*xxxxxxx*xx*x       ***xxxxxxx*xx    ****x*x*******xx
+xxxxxxx*xxxxxxx*xx*xxxxxxxx***xxxxxxx*xx    ****x*x*******xx
 x*******+++++xx*xx*xxxxxxxxxx+x      *xxxxxx*xxxx*xxxxxxx*xx
 x*xxxxxxxxxx+xx****x++++++++++x xxxxx********xxxx*********xx
 x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx               xxxxxxxx
-x*******      xxxx          x xxxxxxxxxxxxxxxxxxxxx xxxxxxxx
-x+xxxxx*xxxxx   xx xxxxxxxx x         xxxxxxxxx   x  xxxxxxx
-xxxxxxx*xxxxxxx xx xxxxxxxx   xxxxxxx xx        x x       xx
-x*******+++++xx xx xxxxxxxxxx x       xxxxxx xxxx xxxxxxx xx
-x*xxxxxxxxxx+xx    x          x xxxxx        xxxx         xx
-x*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 Creature started at [4,4]
+Creature started at [4,10]
 Creature started at [4,4]
-Creature started at [4,4]
-Creature started at [4,4]
+Creature started at [14,38]
 Done!
 *** running with valgrind
 valgrind: ./myprogram.exe: No such file or directory
 *** cleaning up, deleting myprogram
-Sat 30 Oct 2021 11:54:53 PM PDT
+Sun 31 Oct 2021 05:06:22 PM PDT
