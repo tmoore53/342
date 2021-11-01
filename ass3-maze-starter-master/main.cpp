@@ -19,9 +19,9 @@ void test()
     Maze M4("maze4.txt");
 
     Creature C(4, 4);
-    Creature C2(4, 4);
+    Creature C2(4, 10);
     Creature C3(4, 4);
-    Creature C4(4, 4);
+    Creature C4(14, 38);
 
     /*Modified to fix google syntax errors
  Added & next to each Map */
