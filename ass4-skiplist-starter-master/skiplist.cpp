@@ -1,6 +1,9 @@
 
 //modified by mashhadi on 14th feb to add an alternative op<<
+/* 
+  Modified and implimented by Tyler A. Moore
 
+*/
 #include <cassert>
 #include <climits>
 #include <cstdlib>
@@ -9,8 +12,29 @@
 #include "skiplist.h"
 
 using namespace std;
+
+ostream &operator<<(ostream &Out, const SkipList &SkipL)
+{
+  for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
+  {
+    Out << "Level: " + (Index);
+    Out << " -- ";
+    SNode *Curr = SkipL.head;
+    while (Curr != nullptr)
+    {
+      Out << to_string(Curr->value) + ", ";
+      Curr = Curr->forward;
+    }
+    Out << "\n";
+    Curr = Curr->down;
+  }
+  return Out;
+}
+
 /*
-ostream &operator<<(ostream &Out, const SkipList &SkipL) {
+  // This was previously provided
+// I had to change it from above.
+
   for (int Index = SkipL.Depth - 1; Index >= 0; Index--) {
     Out << "Level: " + to_string(Index) + " -- ";
     SkipList::SNode* Curr = SkipL.FrontGuards[Index];
@@ -21,9 +45,6 @@ ostream &operator<<(ostream &Out, const SkipList &SkipL) {
     Out << "\n";
   }
   return Out;
-}
-
-
 
 
 ostream &operator<<(ostream &out, const SkipList &skip) {
@@ -43,7 +64,9 @@ ostream &operator<<(ostream &out, const SkipList &skip) {
   return out;
 }
 */
-SNode::SNode(int value) : value{value} {}
+
+// Skiplist Node Constructor
+SNode::SNode(int value) : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr}, down{nullptr} {}
 
 // how many forward/backward pointers it has
 int SNode::height() const
@@ -57,11 +80,10 @@ int SNode::height() const
   int height2{0};
   while (this->backward != nullptr)
   {
-
     height2++;
   }
 
-  int height = (height > height2) ? height : height2;
+  height = (height > height2) ? height : height2;
 
   return height;
 }
@@ -75,8 +97,7 @@ SNode **FrontGuards;
 // array of Depth SNode* objects as RearGuards linking levels
 SNode **RearGuards;
 
-SkipList::SkipList(int maxLevel, int probability)
-    : maxLevel{maxLevel}, probability{probability}
+SkipList::SkipList(int maxLevel, int probability) : maxLevel{maxLevel}, probability{probability}
 {
   assert(maxLevel > 0 && probability >= 0 && probability < 100);
 }
@@ -88,11 +109,41 @@ bool SkipList::shouldInsertAtHigher() const
 
 bool SkipList::add(const vector<int> &values) { return true; }
 
-bool SkipList::add(int value) { return true; }
+bool SkipList::add(int value)
+{
+  if (this->contains(value))
+    return false;
+
+  if (head == nullptr)
+  {
+    SNode *newNode = new SNode(value);
+    head = newNode;
+  }
+  SNode *curr = head;
+  while (curr != nullptr)
+  {
+
+    curr = curr->forward;
+  }
+  curr->value = value;
+
+  return true;
+}
 
 SkipList::~SkipList()
 {
   // need to delete individual nodes
+  SNode *curr = head;
+  while (curr != nullptr)
+  {
+    delete curr;
+    curr = nullptr;
+    curr = head->forward;
+    if (head->forward == nullptr)
+    {
+      curr = head->down;
+    }
+  }
 }
 
 bool SkipList::remove(int data) { return true; }
@@ -101,14 +152,24 @@ bool SkipList::remove(int data) { return true; }
 void SkipList::addBefore(SNode *NewNode, SNode *NextNode)
 {
   // Link next to node in front
-  NewNode->Next = NextNode;
+  NewNode->forward = NextNode;
   // Link prev to node behind
-  NewNode->Prev = NextNode->Prev;
+  NewNode->backward = NextNode->backward;
   // Link node in back to new node
-  NextNode->Prev->Next = NewNode;
+  NextNode->backward->forward = NewNode;
   // Link node in front to new node
-  NextNode->Prev = NewNode;
+  NextNode->backward = NewNode;
 }
+// This was previously provided
+// I had to change it from above.
+// // Link next to node in front
+// NewNode->Next = NextNode;
+// // Link prev to node behind
+// NewNode->Prev = NextNode->Prev;
+// // Link node in back to new node
+// NextNode->Prev->Next = NewNode;
+// // Link node in front to new node
+// NextNode->Prev = NewNode;
 
 // get the node that would be before this data
 // at level-0

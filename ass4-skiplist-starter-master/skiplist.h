@@ -139,14 +139,14 @@ public:
  *  I just want to know if this could be a great tool to test my logic of the 
  *  code.
  * 
- *  How should I think about calculating the height of the node? 
+ *  How should I think about calculating the height of the node?
+ *  Should it be length instead? or should we measure up and down? 
  *  Can I do: 
  * 
- *   int height{0};
-  while (this->forward != nullptr)
-  {
-    height++;
-  }
-  return height;
+ *  For increase height is the intent to add empty Nodes?
+ * 
+ * 
+ * 
+ *   
  *  
  */
