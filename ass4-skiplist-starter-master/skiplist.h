@@ -30,7 +30,8 @@ using namespace std;
 
 class SkipList;
 
-class SNode {
+class SNode
+{
   friend class SkipList;
   friend ostream &operator<<(ostream &out, const SkipList &skip);
 
@@ -41,17 +42,17 @@ private:
   // data contained in the object
   int value{0};
 
-  // link to Next SNode 
-  SNode * forward;
+  // link to Next SNode
+  SNode *forward;
 
   // link to Prev SNode
-  SNode * backward;
-   
-  //link to up node 
-  SNode * up;
+  SNode *backward;
+
+  //link to up node
+  SNode *up;
 
   // link to down SNode
-  SNode * down;
+  SNode *down;
 
   // how many forward/backward pointers it has
   int height() const;
@@ -60,7 +61,8 @@ private:
   void increaseHeight();
 };
 
-class SkipList {
+class SkipList
+{
   // display with level
   friend ostream &operator<<(ostream &out, const SkipList &skip);
 
@@ -128,3 +130,23 @@ public:
 };
 
 #endif // ASS4_SKIPLIST_H
+
+/**
+ * @brief
+ *  What is the move method supposed to do and what does 2 "&&" do?
+ * 
+ *  Are we given the output stream operator? Because it is commented out.
+ *  I just want to know if this could be a great tool to test my logic of the 
+ *  code.
+ * 
+ *  How should I think about calculating the height of the node? 
+ *  Can I do: 
+ * 
+ *   int height{0};
+  while (this->forward != nullptr)
+  {
+    height++;
+  }
+  return height;
+ *  
+ */

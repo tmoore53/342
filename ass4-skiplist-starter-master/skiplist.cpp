@@ -46,26 +46,43 @@ ostream &operator<<(ostream &out, const SkipList &skip) {
 SNode::SNode(int value) : value{value} {}
 
 // how many forward/backward pointers it has
-int SNode::height() const { return 0; }
+int SNode::height() const
+{
+  int height{0};
+  while (this->forward != nullptr)
+  {
+    height++;
+  }
+
+  int height2{0};
+  while (this->backward != nullptr)
+  {
+
+    height2++;
+  }
+
+  int height = (height > height2) ? height : height2;
+
+  return height;
+}
 
 // increase the number of forward/backward pointers it has
 void SNode::increaseHeight() {}
 
+// array of Depth SNode* objects as FrontGuards linking levels
+SNode **FrontGuards;
 
-
- // array of Depth SNode* objects as FrontGuards linking levels
-  SNode **FrontGuards;
-
-  // array of Depth SNode* objects as RearGuards linking levels
-  SNode **RearGuards;
-
+// array of Depth SNode* objects as RearGuards linking levels
+SNode **RearGuards;
 
 SkipList::SkipList(int maxLevel, int probability)
-    : maxLevel{maxLevel}, probability{probability} {
+    : maxLevel{maxLevel}, probability{probability}
+{
   assert(maxLevel > 0 && probability >= 0 && probability < 100);
 }
 
-bool SkipList::shouldInsertAtHigher() const {
+bool SkipList::shouldInsertAtHigher() const
+{
   return rand() % 100 < probability;
 }
 
@@ -73,16 +90,16 @@ bool SkipList::add(const vector<int> &values) { return true; }
 
 bool SkipList::add(int value) { return true; }
 
-SkipList::~SkipList() {
+SkipList::~SkipList()
+{
   // need to delete individual nodes
 }
 
 bool SkipList::remove(int data) { return true; }
 
-
-
 // Given a SNode, place it before the given NextNode
-void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
+void SkipList::addBefore(SNode *NewNode, SNode *NextNode)
+{
   // Link next to node in front
   NewNode->Next = NextNode;
   // Link prev to node behind
@@ -111,8 +128,6 @@ SNode *SkipList::containsSNode(int data) const { return nullptr; }
 // Returns false otherwise
 
 bool SkipList::contains(int data) const { return true; }
-
-
 
 //private methods to ease linking
 void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
