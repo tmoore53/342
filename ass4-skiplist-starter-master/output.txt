@@ -1,0 +1,219 @@
+Tue 09 Nov 2021 11:13:19 PM PST
+Linux csslab6h 4.19.0-17-amd64 #1 SMP Debian 4.19.194-3 (2021-07-18) x86_64 GNU/Linux
+uid=1076553(tmoore53) gid=2121076553(tmoore53) groups=2121076553(tmoore53),605559(lab-access)
+=====================================================
+1. Compiles without warnings with -Wall -Wextra flags
+=====================================================
+skiplist.cpp: In member function ‘bool SkipList::add(const std::vector<int>&)’:
+skiplist.cpp:110:39: warning: unused parameter ‘values’ [-Wunused-parameter]
+ bool SkipList::add(const vector<int> &values) { return true; }
+                    ~~~~~~~~~~~~~~~~~~~^~~~~~
+skiplist.cpp: In member function ‘bool SkipList::remove(int)’:
+skiplist.cpp:149:27: warning: unused parameter ‘data’ [-Wunused-parameter]
+ bool SkipList::remove(int data) { return true; }
+                       ~~~~^~~~
+skiplist.cpp: In member function ‘SNode* SkipList::containsSNode(int) const’:
+skiplist.cpp:185:36: warning: unused parameter ‘data’ [-Wunused-parameter]
+ SNode *SkipList::containsSNode(int data) const { return nullptr; }
+                                ~~~~^~~~
+skiplist.cpp: In member function ‘bool SkipList::contains(int) const’:
+skiplist.cpp:191:29: warning: unused parameter ‘data’ [-Wunused-parameter]
+ bool SkipList::contains(int data) const { return true; }
+                         ~~~~^~~~
+skiplist.cpp: In static member function ‘static void SkipList::connect2AtLevel(SNode*, SNode*, int)’:
+skiplist.cpp:194:39: warning: unused parameter ‘a’ [-Wunused-parameter]
+ void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
+                                ~~~~~~~^
+skiplist.cpp:194:49: warning: unused parameter ‘b’ [-Wunused-parameter]
+ void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
+                                          ~~~~~~~^
+skiplist.cpp:194:56: warning: unused parameter ‘level’ [-Wunused-parameter]
+ void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
+                                                    ~~~~^~~~~
+skiplist.cpp: In static member function ‘static void SkipList::connect3AtLevel(SNode*, SNode*, SNode*, int)’:
+skiplist.cpp:196:39: warning: unused parameter ‘a’ [-Wunused-parameter]
+ void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
+                                ~~~~~~~^
+skiplist.cpp:196:49: warning: unused parameter ‘b’ [-Wunused-parameter]
+ void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
+                                          ~~~~~~~^
+skiplist.cpp:196:59: warning: unused parameter ‘c’ [-Wunused-parameter]
+ void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
+                                                    ~~~~~~~^
+skiplist.cpp:196:66: warning: unused parameter ‘level’ [-Wunused-parameter]
+ void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
+                                                              ~~~~^~~~~
+=====================================================
+2. Runs and produces correct output
+=====================================================
+Done.
+free(): invalid size
+./create-output.sh: line 69: 186023 Aborted                 $EXEC_PROGRAM
+=====================================================
+3. clang-tidy warnings are fixed
+=====================================================
+4 warnings generated.
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:20:22: warning: adding 'int' to a string does not append to the string [clang-diagnostic-string-plus-int]
+    Out << "Level: " + (Index);
+           ~~~~~~~~~ ^        ~
+           &         [        ]
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:20:22: note: use array indexing to silence this warning
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:5: warning: Value stored to 'Curr' is never read [clang-analyzer-deadcode.DeadStores]
+    Curr = Curr->down;
+    ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:5: note: Value stored to 'Curr' is never read
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:12: warning: Access to field 'down' results in a dereference of a null pointer (loaded from variable 'Curr') [clang-analyzer-core.NullDereference]
+    Curr = Curr->down;
+           ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:18:40: note: Assuming 'Index' is >= 0
+  for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
+                                       ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:18:3: note: Loop condition is true.  Entering loop body
+  for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
+  ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:22:5: note: 'Curr' initialized here
+    SNode *Curr = SkipL.head;
+    ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:23:12: note: Assuming pointer value is null
+    while (Curr != nullptr)
+           ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:23:5: note: Loop condition is false. Execution continues on line 28
+    while (Curr != nullptr)
+    ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:12: note: Access to field 'down' results in a dereference of a null pointer (loaded from variable 'Curr')
+    Curr = Curr->down;
+           ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:141:12: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
+    curr = head->forward;
+           ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:137:10: note: Assuming the condition is true
+  while (curr != nullptr)
+         ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:137:3: note: Loop condition is true.  Entering loop body
+  while (curr != nullptr)
+  ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:139:5: note: Memory is released
+    delete curr;
+    ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:141:12: note: Use of memory after it is freed
+    curr = head->forward;
+           ^
+=====================================================
+4. clang-format does not find any formatting issues
+=====================================================
+Running clang-format on ./main.cpp
+8,9c8
+< void test1()
+< {
+---
+> void test1() {
+31,32c30
+< int main()
+< {
+---
+> int main() {
+38c36
+<   //test1();
+---
+>   // test1();
+Running clang-format on ./skiplist.cpp
+2,3c2,3
+< //modified by mashhadi on 14th feb to add an alternative op<<
+< /* 
+---
+> // modified by mashhadi on 14th feb to add an alternative op<<
+> /*
+16,19c16,17
+< ostream &operator<<(ostream &Out, const SkipList &SkipL)
+< {
+<   for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
+<   {
+---
+> ostream &operator<<(ostream &Out, const SkipList &SkipL) {
+>   for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--) {
+23,24c21
+<     while (Curr != nullptr)
+<     {
+---
+>     while (Curr != nullptr) {
+69c66,68
+< SNode::SNode(int value) : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr}, down{nullptr} {}
+---
+> SNode::SNode(int value)
+>     : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr},
+>       down{nullptr} {}
+72,73c71
+< int SNode::height() const
+< {
+---
+> int SNode::height() const {
+75,76c73
+<   while (this->forward != nullptr)
+<   {
+---
+>   while (this->forward != nullptr) {
+81,82c78
+<   while (this->backward != nullptr)
+<   {
+---
+>   while (this->backward != nullptr) {
+100,101c96,97
+< SkipList::SkipList(int maxLevel, int probability) : maxLevel{maxLevel}, probability{probability}
+< {
+---
+> SkipList::SkipList(int maxLevel, int probability)
+>     : maxLevel{maxLevel}, probability{probability} {
+105,106c101
+< bool SkipList::shouldInsertAtHigher() const
+< {
+---
+> bool SkipList::shouldInsertAtHigher() const {
+112,113c107
+< bool SkipList::add(int value)
+< {
+---
+> bool SkipList::add(int value) {
+117,118c111
+<   if (head == nullptr)
+<   {
+---
+>   if (head == nullptr) {
+123,124c116
+<   while (curr != nullptr)
+<   {
+---
+>   while (curr != nullptr) {
+133,134c125
+< SkipList::~SkipList()
+< {
+---
+> SkipList::~SkipList() {
+137,138c128
+<   while (curr != nullptr)
+<   {
+---
+>   while (curr != nullptr) {
+142,143c132
+<     if (head->forward == nullptr)
+<     {
+---
+>     if (head->forward == nullptr) {
+152,153c141
+< void SkipList::addBefore(SNode *NewNode, SNode *NextNode)
+< {
+---
+> void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
+176c164
+< //vector<SNode *> SkipList::getBeforeNodes(int data) const {
+---
+> // vector<SNode *> SkipList::getBeforeNodes(int data) const {
+193c181
+< //private methods to ease linking
+---
+> // private methods to ease linking
+=====================================================
+5. No memory leaks using g++
+=====================================================
+=====================================================
+6. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
