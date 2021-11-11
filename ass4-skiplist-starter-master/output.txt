@@ -1,103 +1,82 @@
-Tue 09 Nov 2021 11:13:19 PM PST
+Wed 10 Nov 2021 08:47:20 PM PST
 Linux csslab6h 4.19.0-17-amd64 #1 SMP Debian 4.19.194-3 (2021-07-18) x86_64 GNU/Linux
 uid=1076553(tmoore53) gid=2121076553(tmoore53) groups=2121076553(tmoore53),605559(lab-access)
 =====================================================
 1. Compiles without warnings with -Wall -Wextra flags
 =====================================================
 skiplist.cpp: In member function ‘bool SkipList::add(const std::vector<int>&)’:
-skiplist.cpp:110:39: warning: unused parameter ‘values’ [-Wunused-parameter]
+skiplist.cpp:106:39: warning: unused parameter ‘values’ [-Wunused-parameter]
  bool SkipList::add(const vector<int> &values) { return true; }
                     ~~~~~~~~~~~~~~~~~~~^~~~~~
 skiplist.cpp: In member function ‘bool SkipList::remove(int)’:
-skiplist.cpp:149:27: warning: unused parameter ‘data’ [-Wunused-parameter]
+skiplist.cpp:143:27: warning: unused parameter ‘data’ [-Wunused-parameter]
  bool SkipList::remove(int data) { return true; }
                        ~~~~^~~~
 skiplist.cpp: In member function ‘SNode* SkipList::containsSNode(int) const’:
-skiplist.cpp:185:36: warning: unused parameter ‘data’ [-Wunused-parameter]
+skiplist.cpp:178:36: warning: unused parameter ‘data’ [-Wunused-parameter]
  SNode *SkipList::containsSNode(int data) const { return nullptr; }
                                 ~~~~^~~~
 skiplist.cpp: In member function ‘bool SkipList::contains(int) const’:
-skiplist.cpp:191:29: warning: unused parameter ‘data’ [-Wunused-parameter]
+skiplist.cpp:184:29: warning: unused parameter ‘data’ [-Wunused-parameter]
  bool SkipList::contains(int data) const { return true; }
                          ~~~~^~~~
 skiplist.cpp: In static member function ‘static void SkipList::connect2AtLevel(SNode*, SNode*, int)’:
-skiplist.cpp:194:39: warning: unused parameter ‘a’ [-Wunused-parameter]
+skiplist.cpp:187:39: warning: unused parameter ‘a’ [-Wunused-parameter]
  void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
                                 ~~~~~~~^
-skiplist.cpp:194:49: warning: unused parameter ‘b’ [-Wunused-parameter]
+skiplist.cpp:187:49: warning: unused parameter ‘b’ [-Wunused-parameter]
  void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
                                           ~~~~~~~^
-skiplist.cpp:194:56: warning: unused parameter ‘level’ [-Wunused-parameter]
+skiplist.cpp:187:56: warning: unused parameter ‘level’ [-Wunused-parameter]
  void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
                                                     ~~~~^~~~~
 skiplist.cpp: In static member function ‘static void SkipList::connect3AtLevel(SNode*, SNode*, SNode*, int)’:
-skiplist.cpp:196:39: warning: unused parameter ‘a’ [-Wunused-parameter]
+skiplist.cpp:189:39: warning: unused parameter ‘a’ [-Wunused-parameter]
  void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
                                 ~~~~~~~^
-skiplist.cpp:196:49: warning: unused parameter ‘b’ [-Wunused-parameter]
+skiplist.cpp:189:49: warning: unused parameter ‘b’ [-Wunused-parameter]
  void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
                                           ~~~~~~~^
-skiplist.cpp:196:59: warning: unused parameter ‘c’ [-Wunused-parameter]
+skiplist.cpp:189:59: warning: unused parameter ‘c’ [-Wunused-parameter]
  void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
                                                     ~~~~~~~^
-skiplist.cpp:196:66: warning: unused parameter ‘level’ [-Wunused-parameter]
+skiplist.cpp:189:66: warning: unused parameter ‘level’ [-Wunused-parameter]
  void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
                                                               ~~~~^~~~~
 =====================================================
 2. Runs and produces correct output
 =====================================================
 Done.
-free(): invalid size
-./create-output.sh: line 69: 186023 Aborted                 $EXEC_PROGRAM
+munmap_chunk(): invalid pointer
+./create-output.sh: line 69: 218367 Aborted                 $EXEC_PROGRAM
 =====================================================
 3. clang-tidy warnings are fixed
 =====================================================
-4 warnings generated.
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:20:22: warning: adding 'int' to a string does not append to the string [clang-diagnostic-string-plus-int]
-    Out << "Level: " + (Index);
-           ~~~~~~~~~ ^        ~
-           &         [        ]
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:20:22: note: use array indexing to silence this warning
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:5: warning: Value stored to 'Curr' is never read [clang-analyzer-deadcode.DeadStores]
-    Curr = Curr->down;
-    ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:5: note: Value stored to 'Curr' is never read
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:12: warning: Access to field 'down' results in a dereference of a null pointer (loaded from variable 'Curr') [clang-analyzer-core.NullDereference]
-    Curr = Curr->down;
-           ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:18:40: note: Assuming 'Index' is >= 0
-  for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
-                                       ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:18:3: note: Loop condition is true.  Entering loop body
-  for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
+1 warning generated.
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:138:3: warning: Attempt to free released memory [clang-analyzer-cplusplus.NewDelete]
+  delete head;
   ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:22:5: note: 'Curr' initialized here
-    SNode *Curr = SkipL.head;
-    ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:23:12: note: Assuming pointer value is null
-    while (Curr != nullptr)
-           ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:23:5: note: Loop condition is false. Execution continues on line 28
-    while (Curr != nullptr)
-    ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:29:12: note: Access to field 'down' results in a dereference of a null pointer (loaded from variable 'Curr')
-    Curr = Curr->down;
-           ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:141:12: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
-    curr = head->forward;
-           ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:137:10: note: Assuming the condition is true
-  while (curr != nullptr)
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:129:10: note: Assuming the condition is true
+  while (curr != nullptr) {
          ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:137:3: note: Loop condition is true.  Entering loop body
-  while (curr != nullptr)
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:129:3: note: Loop condition is true.  Entering loop body
+  while (curr != nullptr) {
   ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:139:5: note: Memory is released
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:131:5: note: Memory is released
     delete curr;
     ^
-/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:141:12: note: Use of memory after it is freed
-    curr = head->forward;
-           ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:133:9: note: Assuming the condition is true
+    if (next->down == nullptr) {
+        ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:133:5: note: Taking true branch
+    if (next->down == nullptr) {
+    ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:129:3: note: Loop condition is false. Execution continues on line 138
+  while (curr != nullptr) {
+  ^
+/home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/skiplist.cpp:138:3: note: Attempt to free released memory
+  delete head;
+  ^
 =====================================================
 4. clang-format does not find any formatting issues
 =====================================================
@@ -117,103 +96,73 @@ Running clang-format on ./main.cpp
 ---
 >   // test1();
 Running clang-format on ./skiplist.cpp
-2,3c2,3
-< //modified by mashhadi on 14th feb to add an alternative op<<
-< /* 
----
-> // modified by mashhadi on 14th feb to add an alternative op<<
-> /*
-16,19c16,17
-< ostream &operator<<(ostream &Out, const SkipList &SkipL)
-< {
-<   for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--)
-<   {
----
-> ostream &operator<<(ostream &Out, const SkipList &SkipL) {
->   for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--) {
-23,24c21
-<     while (Curr != nullptr)
-<     {
----
->     while (Curr != nullptr) {
-69c66,68
-< SNode::SNode(int value) : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr}, down{nullptr} {}
----
-> SNode::SNode(int value)
->     : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr},
->       down{nullptr} {}
-72,73c71
-< int SNode::height() const
-< {
----
-> int SNode::height() const {
-75,76c73
-<   while (this->forward != nullptr)
-<   {
----
->   while (this->forward != nullptr) {
-81,82c78
-<   while (this->backward != nullptr)
-<   {
----
->   while (this->backward != nullptr) {
-100,101c96,97
-< SkipList::SkipList(int maxLevel, int probability) : maxLevel{maxLevel}, probability{probability}
-< {
----
-> SkipList::SkipList(int maxLevel, int probability)
->     : maxLevel{maxLevel}, probability{probability} {
-105,106c101
-< bool SkipList::shouldInsertAtHigher() const
-< {
----
-> bool SkipList::shouldInsertAtHigher() const {
-112,113c107
-< bool SkipList::add(int value)
-< {
----
-> bool SkipList::add(int value) {
-117,118c111
-<   if (head == nullptr)
-<   {
----
->   if (head == nullptr) {
-123,124c116
-<   while (curr != nullptr)
-<   {
----
->   while (curr != nullptr) {
-133,134c125
-< SkipList::~SkipList()
-< {
----
-> SkipList::~SkipList() {
-137,138c128
-<   while (curr != nullptr)
-<   {
----
->   while (curr != nullptr) {
-142,143c132
-<     if (head->forward == nullptr)
-<     {
----
->     if (head->forward == nullptr) {
-152,153c141
-< void SkipList::addBefore(SNode *NewNode, SNode *NextNode)
-< {
----
-> void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
-176c164
-< //vector<SNode *> SkipList::getBeforeNodes(int data) const {
----
-> // vector<SNode *> SkipList::getBeforeNodes(int data) const {
-193c181
-< //private methods to ease linking
----
-> // private methods to ease linking
 =====================================================
 5. No memory leaks using g++
 =====================================================
 =====================================================
 6. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
+valgrind: no program specified
+valgrind: Use --help for more information.
+==209442== Memcheck, a memory error detector
+==209442== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==209442== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==209442== Command: ./a.out
+==209442== Parent PID: 209367
+==209442== 
+==209442== Conditional jump or move depends on uninitialised value(s)
+==209442==    at 0x10B33F: SkipList::~SkipList() (skiplist.cpp:137)
+==209442==    by 0x10A7C0: main (main.cpp:33)
+==209442== 
+==209442== Conditional jump or move depends on uninitialised value(s)
+==209442==    at 0x4836E61: operator delete(void*) (vg_replace_malloc.c:576)
+==209442==    by 0x10B34C: SkipList::~SkipList() (skiplist.cpp:139)
+==209442==    by 0x10A7C0: main (main.cpp:33)
+==209442== 
+==209442== Invalid free() / delete / delete[] / realloc()
+==209442==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
+==209442==    by 0x10B34C: SkipList::~SkipList() (skiplist.cpp:139)
+==209442==    by 0x10A7C0: main (main.cpp:33)
+==209442==  Address 0x10b930 is in the Text segment of /home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/a.out
+==209442==    at 0x10B930: __libc_csu_init (in /home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/a.out)
+==209442== 
+==209442== Use of uninitialised value of size 8
+==209442==    at 0x10B35D: SkipList::~SkipList() (skiplist.cpp:141)
+==209442==    by 0x10A7C0: main (main.cpp:33)
+==209442== 
+==209442== Use of uninitialised value of size 8
+==209442==    at 0x10B36D: SkipList::~SkipList() (skiplist.cpp:142)
+==209442==    by 0x10A7C0: main (main.cpp:33)
+==209442== 
+==209442== 
+==209442== More than 10000000 total errors detected.  I'm not reporting any more.
+==209442== Final error counts will be inaccurate.  Go fix your program!
+==209442== Rerun with --error-limit=no to disable this cutoff.  Note
+==209442== that errors may occur in your program without prior warning from
+==209442== Valgrind, because errors are no longer being displayed.
+==209442== 
+==209442== 
+==209442== Process terminating with default action of signal 2 (SIGINT)
+==209442==    at 0x4901260: operator delete(void*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==209442==    by 0x10B34C: SkipList::~SkipList() (skiplist.cpp:139)
+==209442==    by 0x10A7C0: main (main.cpp:33)
+==209442== 
+==209442== HEAP SUMMARY:
+==209442==     in use at exit: 0 bytes in 0 blocks
+==209442==   total heap usage: 2 allocs, 87,390,376 frees, 76,800 bytes allocated
+==209442== 
+==209442== All heap blocks were freed -- no leaks are possible
+==209442== 
+==209442== For counts of detected and suppressed errors, rerun with: -v
+==209442== Use --track-origins=yes to see where uninitialised values come from
+==209442== ERROR SUMMARY: 10000000 errors from 5 contexts (suppressed: 0 from 0)
+=====================================================
+7. Tests have full code coverage
+=====================================================
+./create-output.sh: line 134: ./check-code-coverage.sh: Permission denied
+Wed 10 Nov 2021 08:47:24 PM PST
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
 =====================================================
