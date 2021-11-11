@@ -130,8 +130,8 @@ public:
 };
 
 #endif // ASS4_SKIPLIST_H
-
-/**
+       //
+       /**
  * @brief
  *  What is the move method supposed to do and what does 2 "&&" do?
  * 
