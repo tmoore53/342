@@ -112,6 +112,11 @@ bool SkipList::add(int value) {
   if (head == nullptr) {
     SNode *newNode = new SNode(value);
     head = newNode;
+    if (shouldInsertAtHigher()) {
+      SNode *upperLvlNode = newNode;
+        }
+
+    return true;
   }
   SNode *curr = head;
   while (curr != nullptr) {

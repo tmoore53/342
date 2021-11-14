@@ -30,8 +30,7 @@ using namespace std;
 
 class SkipList;
 
-class SNode
-{
+class SNode {
   friend class SkipList;
   friend ostream &operator<<(ostream &out, const SkipList &skip);
 
@@ -48,7 +47,7 @@ private:
   // link to Prev SNode
   SNode *backward;
 
-  //link to up node
+  // link to up node
   SNode *up;
 
   // link to down SNode
@@ -61,8 +60,7 @@ private:
   void increaseHeight();
 };
 
-class SkipList
-{
+class SkipList {
   // display with level
   friend ostream &operator<<(ostream &out, const SkipList &skip);
 
@@ -72,13 +70,19 @@ private:
 
   // probability of inserting at a higher level
   // as an integer between 0% and 100% (exclusive)
-  int probability = 0;
+  // Assignment called out for 50/50
+  int probability = 50;
 
   // head of linked levels
   SNode *head;
 
   // tail of linked levels
   SNode *tail;
+
+  // Added in accordance with the Assignment 4 instructions
+  // first and the last items at each of the levels
+  vector<SNode *> INT_MIN[maxLevel];
+  vector<SNode *> INT_MAX[maxLevel];
 
   // given a SNode, place it before the given nextNode
   void addBefore(SNode *newNode, SNode *nextNode);
@@ -132,21 +136,21 @@ public:
 #endif // ASS4_SKIPLIST_H
        //
        /**
- * @brief
- *  What is the move method supposed to do and what does 2 "&&" do?
- * 
- *  Are we given the output stream operator? Because it is commented out.
- *  I just want to know if this could be a great tool to test my logic of the 
- *  code.
- * 
- *  How should I think about calculating the height of the node?
- *  Should it be length instead? or should we measure up and down? 
- *  Can I do: 
- * 
- *  For increase height is the intent to add empty Nodes?
- * 
- * 
- * 
- *   
- *  
- */
+        * @brief
+        *  What is the move method supposed to do and what does 2 "&&" do?
+        *
+        *  Are we given the output stream operator? Because it is commented out.
+        *  I just want to know if this could be a great tool to test my logic of the
+        *  code.
+        *
+        *  How should I think about calculating the height of the node?
+        *  Should it be length instead? or should we measure up and down?
+        *  Can I do:
+        *
+        *  For increase height is the intent to add empty Nodes?
+        *
+        *
+        *
+        *
+        *
+        */

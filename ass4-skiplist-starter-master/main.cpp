@@ -5,8 +5,7 @@
 
 using namespace std;
 
-void test1()
-{
+void test1() {
   // setting seed for easy testing
   srand(10000);
   SkipList skp(5, 80);
@@ -28,14 +27,13 @@ void test1()
   cout << skp << endl;
 }
 
-int main()
-{
-  SkipList skp(5, 80);
-  skp.add(1);
-  skp.add(3);
-  skp.add(5);
+int main() {
+  // SkipList skp(5, 80);
+  // skp.add(1);
+  // skp.add(3);
+  // skp.add(5);
 
-  //test1();
+  // test1();
 
   cout << "Done." << endl;
   return 0;
