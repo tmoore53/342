@@ -32,6 +32,13 @@ int main() {
   skp.add(1);
   skp.add(3);
   skp.add(5);
+  skp.add(2);
+  skp.add(-1);
+  skp.add(3);
+
+
+
+
 
   cout << skp << endl;
 

@@ -110,17 +110,21 @@ bool SkipList::add(int value) {
 
   if (head == nullptr) {
     head = newNode;
-    newNode->backward = iNT_MIN[0];
-    newNode->forward = iNT_MIN[0];
+    // newNode->backward = iNT_MIN[0];
+    // newNode->forward = iNT_MIN[0];
 
   } else if (head->value > value) {
-    newNode->backward = iNT_MIN[0];
+    // newNode->backward = iNT_MIN[0];
     newNode->forward = head;
     newNode->forward->backward = newNode;
     head = newNode;
   } else {
     SNode *curr = head;
     while (curr->forward != nullptr && curr->forward->value < value) {
+      if(curr->forward->value == value){
+        delete newNode;
+        return false;
+      }
       curr = curr->forward;
     }
 

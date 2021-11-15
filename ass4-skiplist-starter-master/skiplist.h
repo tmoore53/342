@@ -74,7 +74,7 @@ private:
   int probability = 50;
 
   // head of linked levels
-  SNode *head;
+  SNode *head =nullptr;
 
   // tail of linked levels
   SNode *tail;
