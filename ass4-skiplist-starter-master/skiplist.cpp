@@ -14,18 +14,15 @@
 using namespace std;
 
 ostream &operator<<(ostream &Out, const SkipList &SkipL) {
-  for (int Index = SkipL.maxLevel - 1; Index >= 0; Index--) {
-    Out << "Level: " + to_string(Index);
-    Out << " -- ";
-    SNode *Curr = SkipL.head;
-    while (Curr != nullptr) {
-      Out << to_string(Curr->value) + ", ";
-      Curr = Curr->forward;
-      if (Curr->down != nullptr)
-        Curr = Curr->down;
-    }
-    Out << "\n";
+  Out << "Level: " + to_string(1);
+  Out << " -- ";
+  SNode *Curr = SkipL.head;
+
+  while (Curr != nullptr) {
+    Out << to_string(Curr->value) + ", ";
+    Curr = Curr->forward;
   }
+  Out << "\n";
   return Out;
 }
 
@@ -103,27 +100,39 @@ bool SkipList::shouldInsertAtHigher() const {
   return rand() % 100 < probability;
 }
 
-bool SkipList::add(const vector<int> &values) { return true; }
+// bool SkipList::add(const vector<int> &values) { return true; }
 
 bool SkipList::add(int value) {
-  if (this->contains(value))
-    return false;
+  // if (this->contains(value))
+  //   return false;
+
+  SNode *newNode = new SNode(value);
 
   if (head == nullptr) {
-    SNode *newNode = new SNode(value);
     head = newNode;
-    if (shouldInsertAtHigher()) {
-      SNode *upperLvlNode = newNode;
-        }
+    newNode->backward = iNT_MIN[0];
+    newNode->forward = iNT_MIN[0];
 
-    return true;
-  }
-  SNode *curr = head;
-  while (curr != nullptr) {
+  } else if (head->value > value) {
+    newNode->backward = iNT_MIN[0];
+    newNode->forward = head;
+    newNode->forward->backward = newNode;
+    head = newNode;
+  } else {
+    SNode *curr = head;
+    while (curr->forward != nullptr && curr->forward->value < value) {
+      curr = curr->forward;
+    }
 
-    curr = curr->forward;
+    newNode->forward = curr->forward;
+    if (curr->forward != nullptr)
+      newNode->forward->backward = curr->backward;
+
+    curr->forward = newNode;
+    newNode->backward = curr;
+
+    curr = nullptr;
   }
-  curr->value = value;
 
   return true;
 }
@@ -135,30 +144,33 @@ SkipList::~SkipList() {
     SNode *next = curr->forward;
     delete curr;
     curr = next;
-    if (next->down == nullptr) {
-      curr = next->down;
-    }
+    next = nullptr;
   }
 
   // Head is already deleted
   // delete head;
+  this->iNT_MAX.clear();
+  iNT_MAX.shrink_to_fit();
+  this->iNT_MIN.clear();
+  iNT_MIN.shrink_to_fit();
+
   head = nullptr;
   curr = nullptr;
 }
 
-bool SkipList::remove(int data) { return true; }
+// bool SkipList::remove(int data) { return true; }
 
 // Given a SNode, place it before the given NextNode
-void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
-  // Link next to node in front
-  NewNode->forward = NextNode;
-  // Link prev to node behind
-  NewNode->backward = NextNode->backward;
-  // Link node in back to new node
-  NextNode->backward->forward = NewNode;
-  // Link node in front to new node
-  NextNode->backward = NewNode;
-}
+// void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
+//   // Link next to node in front
+//   NewNode->forward = NextNode;
+//   // Link prev to node behind
+//   NewNode->backward = NextNode->backward;
+//   // Link node in back to new node
+//   NextNode->backward->forward = NewNode;
+//   // Link node in front to new node
+//   NextNode->backward = NewNode;
+// }
 // This was previously provided
 // I had to change it from above.
 // // Link next to node in front
@@ -181,15 +193,15 @@ void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
 // Returns the NODE if the value exists in the SkipList.
 // Returns nullptr otherwise
 
-SNode *SkipList::containsSNode(int data) const { return nullptr; }
+// SNode *SkipList::containsSNode(int data) const { return nullptr; }
 
 // Checks to see whether or not a data value exists in the list
 // Returns true if the value exists in the SkipList.
 // Returns false otherwise
 
-bool SkipList::contains(int data) const { return true; }
+// bool SkipList::contains(int data) const { return true; }
 
 // private methods to ease linking
-void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
+// void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
 
-void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
+// void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}

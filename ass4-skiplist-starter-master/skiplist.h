@@ -81,8 +81,8 @@ private:
 
   // Added in accordance with the Assignment 4 instructions
   // first and the last items at each of the levels
-  vector<SNode *> INT_MIN[maxLevel];
-  vector<SNode *> INT_MAX[maxLevel];
+  vector<SNode *> iNT_MIN;
+  vector<SNode *> iNT_MAX;
 
   // given a SNode, place it before the given nextNode
   void addBefore(SNode *newNode, SNode *nextNode);

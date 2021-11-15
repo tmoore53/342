@@ -1,52 +1,112 @@
-==209442== Memcheck, a memory error detector
-==209442== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==209442== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
-==209442== Command: ./a.out
-==209442== Parent PID: 209367
-==209442== 
-==209442== Conditional jump or move depends on uninitialised value(s)
-==209442==    at 0x10B33F: SkipList::~SkipList() (skiplist.cpp:137)
-==209442==    by 0x10A7C0: main (main.cpp:33)
-==209442== 
-==209442== Conditional jump or move depends on uninitialised value(s)
-==209442==    at 0x4836E61: operator delete(void*) (vg_replace_malloc.c:576)
-==209442==    by 0x10B34C: SkipList::~SkipList() (skiplist.cpp:139)
-==209442==    by 0x10A7C0: main (main.cpp:33)
-==209442== 
-==209442== Invalid free() / delete / delete[] / realloc()
-==209442==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==209442==    by 0x10B34C: SkipList::~SkipList() (skiplist.cpp:139)
-==209442==    by 0x10A7C0: main (main.cpp:33)
-==209442==  Address 0x10b930 is in the Text segment of /home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/a.out
-==209442==    at 0x10B930: __libc_csu_init (in /home/NETID/tmoore53/Assignments/342/ass4-skiplist-starter-master/a.out)
-==209442== 
-==209442== Use of uninitialised value of size 8
-==209442==    at 0x10B35D: SkipList::~SkipList() (skiplist.cpp:141)
-==209442==    by 0x10A7C0: main (main.cpp:33)
-==209442== 
-==209442== Use of uninitialised value of size 8
-==209442==    at 0x10B36D: SkipList::~SkipList() (skiplist.cpp:142)
-==209442==    by 0x10A7C0: main (main.cpp:33)
-==209442== 
-==209442== 
-==209442== More than 10000000 total errors detected.  I'm not reporting any more.
-==209442== Final error counts will be inaccurate.  Go fix your program!
-==209442== Rerun with --error-limit=no to disable this cutoff.  Note
-==209442== that errors may occur in your program without prior warning from
-==209442== Valgrind, because errors are no longer being displayed.
-==209442== 
-==209442== 
-==209442== Process terminating with default action of signal 2 (SIGINT)
-==209442==    at 0x4901260: operator delete(void*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
-==209442==    by 0x10B34C: SkipList::~SkipList() (skiplist.cpp:139)
-==209442==    by 0x10A7C0: main (main.cpp:33)
-==209442== 
-==209442== HEAP SUMMARY:
-==209442==     in use at exit: 0 bytes in 0 blocks
-==209442==   total heap usage: 2 allocs, 87,390,376 frees, 76,800 bytes allocated
-==209442== 
-==209442== All heap blocks were freed -- no leaks are possible
-==209442== 
-==209442== For counts of detected and suppressed errors, rerun with: -v
-==209442== Use --track-origins=yes to see where uninitialised values come from
-==209442== ERROR SUMMARY: 10000000 errors from 5 contexts (suppressed: 0 from 0)
+==91571== Memcheck, a memory error detector
+==91571== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==91571== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==91571== Command: ./a.out
+==91571== Parent PID: 91468
+==91571== 
+==91571== Conditional jump or move depends on uninitialised value(s)
+==91571==    at 0x10A79B: SkipList::add(int) (skiplist.cpp:111)
+==91571==    by 0x10A35B: main (main.cpp:32)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A7F6: SkipList::add(int) (skiplist.cpp:116)
+==91571==    by 0x10A35B: main (main.cpp:32)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A85E: SkipList::add(int) (skiplist.cpp:123)
+==91571==    by 0x10A35B: main (main.cpp:32)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A888: SkipList::add(int) (skiplist.cpp:127)
+==91571==    by 0x10A35B: main (main.cpp:32)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A898: SkipList::add(int) (skiplist.cpp:128)
+==91571==    by 0x10A35B: main (main.cpp:32)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A8BD: SkipList::add(int) (skiplist.cpp:131)
+==91571==    by 0x10A35B: main (main.cpp:32)
+==91571== 
+==91571== Conditional jump or move depends on uninitialised value(s)
+==91571==    at 0x10A79B: SkipList::add(int) (skiplist.cpp:111)
+==91571==    by 0x10A36C: main (main.cpp:33)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A7F6: SkipList::add(int) (skiplist.cpp:116)
+==91571==    by 0x10A36C: main (main.cpp:33)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A85E: SkipList::add(int) (skiplist.cpp:123)
+==91571==    by 0x10A36C: main (main.cpp:33)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A86B: SkipList::add(int) (skiplist.cpp:123)
+==91571==    by 0x10A36C: main (main.cpp:33)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A87A: SkipList::add(int) (skiplist.cpp:124)
+==91571==    by 0x10A36C: main (main.cpp:33)
+==91571== 
+==91571== Conditional jump or move depends on uninitialised value(s)
+==91571==    at 0x10A79B: SkipList::add(int) (skiplist.cpp:111)
+==91571==    by 0x10A37D: main (main.cpp:34)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A7F6: SkipList::add(int) (skiplist.cpp:116)
+==91571==    by 0x10A37D: main (main.cpp:34)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A85E: SkipList::add(int) (skiplist.cpp:123)
+==91571==    by 0x10A37D: main (main.cpp:34)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A86B: SkipList::add(int) (skiplist.cpp:123)
+==91571==    by 0x10A37D: main (main.cpp:34)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A87A: SkipList::add(int) (skiplist.cpp:124)
+==91571==    by 0x10A37D: main (main.cpp:34)
+==91571== 
+==91571== Conditional jump or move depends on uninitialised value(s)
+==91571==    at 0x10A505: operator<<(std::ostream&, SkipList const&) (skiplist.cpp:21)
+==91571==    by 0x10A390: main (main.cpp:36)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A50B: operator<<(std::ostream&, SkipList const&) (skiplist.cpp:22)
+==91571==    by 0x10A390: main (main.cpp:36)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A567: operator<<(std::ostream&, SkipList const&) (skiplist.cpp:23)
+==91571==    by 0x10A390: main (main.cpp:36)
+==91571== 
+==91571== Conditional jump or move depends on uninitialised value(s)
+==91571==    at 0x10A90D: SkipList::~SkipList() (skiplist.cpp:143)
+==91571==    by 0x10A3DE: main (main.cpp:31)
+==91571== 
+==91571== Use of uninitialised value of size 8
+==91571==    at 0x10A913: SkipList::~SkipList() (skiplist.cpp:144)
+==91571==    by 0x10A3DE: main (main.cpp:31)
+==91571== 
+==91571== Conditional jump or move depends on uninitialised value(s)
+==91571==    at 0x4836E61: operator delete(void*) (vg_replace_malloc.c:576)
+==91571==    by 0x10A926: SkipList::~SkipList() (skiplist.cpp:145)
+==91571==    by 0x10A3DE: main (main.cpp:31)
+==91571== 
+==91571== Invalid free() / delete / delete[] / realloc()
+==91571==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
+==91571==    by 0x10A926: SkipList::~SkipList() (skiplist.cpp:145)
+==91571==    by 0x10A3DE: main (main.cpp:31)
+==91571==  Address 0x1ffeffffe0 is on thread 1's stack
+==91571==  in frame #2, created by main (main.cpp:30)
+==91571== 
+==91571== 
+==91571== HEAP SUMMARY:
+==91571==     in use at exit: 0 bytes in 0 blocks
+==91571==   total heap usage: 5 allocs, 6 frees, 76,920 bytes allocated
+==91571== 
+==91571== All heap blocks were freed -- no leaks are possible
+==91571== 
+==91571== For counts of detected and suppressed errors, rerun with: -v
+==91571== Use --track-origins=yes to see where uninitialised values come from
+==91571== ERROR SUMMARY: 23 errors from 23 contexts (suppressed: 0 from 0)
