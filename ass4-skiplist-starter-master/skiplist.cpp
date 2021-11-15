@@ -120,8 +120,8 @@ bool SkipList::add(int value) {
     head = newNode;
   } else {
     SNode *curr = head;
-    while (curr->forward != nullptr && curr->forward->value < value) {
-      if(curr->forward->value == value){
+    while (curr->forward != nullptr && curr->forward->value <= value) {
+      if (curr->forward->value == newNode->value) {
         delete newNode;
         return false;
       }
