@@ -94,6 +94,31 @@ SNode **RearGuards;
 SkipList::SkipList(int maxLevel, int probability)
     : maxLevel{maxLevel}, probability{probability} {
   assert(maxLevel > 0 && probability >= 0 && probability < 100);
+
+  // Added in accordance with the Assignment 4 instructions
+  // first and the last items at each of the levels
+  // SNode *temp = new SNode(NULL);
+  // SNode *temp2 = new SNode(NULL);
+
+  vector<SNode *> iNT_MIN;
+  vector<SNode *> iNT_MAX;
+
+  iNT_MIN.push_back(nullptr);
+
+  iNT_MAX.push_back(nullptr);
+
+  cout << "Int min and max size: " << endl;
+
+  cout << iNT_MIN.size() << endl;
+  cout << iNT_MAX.size() << endl;
+
+  // cout << iNT_MAX.size() << endl;
+
+  // for (int level{maxLevel}; level > 0; level--) {
+
+  //   iNT_MIN.insert(temp);
+  //   iNT_MAX.insert(temp);
+  // }
 }
 
 bool SkipList::shouldInsertAtHigher() const {
