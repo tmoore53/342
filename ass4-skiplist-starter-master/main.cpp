@@ -35,11 +35,6 @@ int main() {
   skp.add(2);
   skp.add(-1);
   skp.add(3);
-
-
-
-
-
   cout << skp << endl;
 
   // test1();

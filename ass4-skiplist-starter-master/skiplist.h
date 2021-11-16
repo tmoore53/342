@@ -66,7 +66,10 @@ class SkipList {
 
 private:
   // maximum number of levels
-  int maxLevel = 1;
+  const int maxLevel = 1;
+
+  vector<SNode *> iNT_MIN;
+  vector<SNode *> iNT_MAX;
 
   // probability of inserting at a higher level
   // as an integer between 0% and 100% (exclusive)
@@ -78,11 +81,6 @@ private:
 
   // tail of linked levels
   SNode *tail;
-
-  // Added in accordance with the Assignment 4 instructions
-  // first and the last items at each of the levels
-  vector<SNode *> iNT_MIN;
-  vector<SNode *> iNT_MAX;
 
   // given a SNode, place it before the given nextNode
   void addBefore(SNode *newNode, SNode *nextNode);
