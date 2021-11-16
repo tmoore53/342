@@ -103,22 +103,17 @@ SkipList::SkipList(int maxLevel, int probability)
   vector<SNode *> iNT_MIN;
   vector<SNode *> iNT_MAX;
 
-  iNT_MIN.push_back(nullptr);
+  for (int level{maxLevel}; level > 0; level--) {
 
-  iNT_MAX.push_back(nullptr);
+    iNT_MIN.push_back(nullptr);
+
+    iNT_MAX.push_back(nullptr);
+  }
 
   cout << "Int min and max size: " << endl;
 
   cout << iNT_MIN.size() << endl;
   cout << iNT_MAX.size() << endl;
-
-  // cout << iNT_MAX.size() << endl;
-
-  // for (int level{maxLevel}; level > 0; level--) {
-
-  //   iNT_MIN.insert(temp);
-  //   iNT_MAX.insert(temp);
-  // }
 }
 
 bool SkipList::shouldInsertAtHigher() const {
@@ -231,6 +226,8 @@ SkipList::~SkipList() {
 // bool SkipList::contains(int data) const { return true; }
 
 // private methods to ease linking
-// void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {}
+// void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {
+
+// }
 
 // void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}
