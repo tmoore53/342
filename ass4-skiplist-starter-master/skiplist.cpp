@@ -154,40 +154,51 @@ bool SkipList::add(int value) {
     head = newNode;
     iNT_MIN[0] = head;
   } else {
+    // Start at the head
     SNode *curr = head;
+
+    /* Keep looking forward if the current node is not null and
+    less than the value*/
     while (curr->forward != nullptr && curr->forward->value <= value) {
+      /* If the value is next value is equal then delete node, exit, and
+       return false */
       if (curr->forward->value == newNode->value) {
         delete newNode;
         return false;
       }
+      // Keep traversing if the node ahead is less than and not null
       curr = curr->forward;
     }
     // New Node's next will point to the current pointer's next
-
-    newNode->forward = curr->forward;
-
-    // if the current node's next is not null then have the
-    // current node's previous point back to the new node
-    if (curr->forward != nullptr) {
-
-      newNode->forward->backward = curr->backward;
-    }
-
-    // point the current node to the new node
-    curr->forward = newNode;
-    // point the new nodes back to
-    newNode->backward = curr;
-    // If the newNode's value is larger than the tail the tail
-    // gets pointed to the new node
-    if (value > tail->value) {
-      tail = newNode;
-      iNT_MAX[0] = tail;
-    }
+    // Current pointer should be less than the new node
+    
+    addBefore(newNode, curr);
 
     curr = nullptr;
   }
 
   return true;
+}
+// Given a SNode, place it before the given Previous Node
+void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
+  // Link next to node in front
+  NewNode->forward = PrevNode->forward;
+  // point the current node to the new node
+  PrevNode->forward = NewNode;
+  // point the new nodes back to
+  NewNode->backward = PrevNode;
+  
+  // If the newNode's value is larger than the tail the tail
+  // gets pointed to the new node
+  if (NewNode->value > tail->value) {
+    tail = NewNode;
+    iNT_MAX[0] = tail;
+  }
+}
+
+void SkipList::goHigher(SNode *a, int level) {
+  while (shouldInsertAtHigher()) {
+  }
 }
 
 SkipList::~SkipList() {
@@ -212,35 +223,6 @@ SkipList::~SkipList() {
 }
 
 // bool SkipList::remove(int data) { return true; }
-
-// Given a SNode, place it before the given NextNode
-// void SkipList::addBefore(SNode *NewNode, SNode *NextNode) {
-//   // Link next to node in front
-//   NewNode->forward = NextNode;
-//   // Link prev to node behind
-//   NewNode->backward = NextNode->backward;
-//   // Link node in back to new node
-//   NextNode->backward->forward = NewNode;
-//   // Link node in front to new node
-//   NextNode->backward = NewNode;
-// }
-// This was previously provided
-// I had to change it from above.
-// // Link next to node in front
-// NewNode->Next = NextNode;
-// // Link prev to node behind
-// NewNode->Prev = NextNode->Prev;
-// // Link node in back to new node
-// NextNode->Prev->Next = NewNode;
-// // Link node in front to new node
-// NextNode->Prev = NewNode;
-
-// get the node that would be before this data
-// at level-0
-// vector<SNode *> SkipList::getBeforeNodes(int data) const {
-//  vector<SNode *> v(maxLevel);
-//  return v;
-//}
 
 // Checks to see whether or not a data value exists in the list
 // Returns the NODE if the value exists in the SkipList.
