@@ -159,19 +159,22 @@ bool SkipList::add(int value) {
 
     /* Keep looking forward if the current node is not null and
     less than the value*/
-    while (curr->forward != nullptr && curr->forward->value <= value) {
-      /* If the value is next value is equal then delete node, exit, and
-       return false */
-      if (curr->forward->value == newNode->value) {
-        delete newNode;
-        return false;
-      }
-      // Keep traversing if the node ahead is less than and not null
-      curr = curr->forward;
-    }
+    curr = getPrevNode(curr, value);
+    // while (curr->forward != nullptr && curr->forward->value <= value) {
+    //   /* If the value is next value is equal then delete node, exit, and
+    //    return false */
+    //   if (curr->forward->value == newNode->value) {
+    //     delete newNode;
+    //     return false;
+    //   }
+    //   // Keep traversing if the node ahead is less than and not null
+    //   curr = curr->forward;
+    // }
     // New Node's next will point to the current pointer's next
     // Current pointer should be less than the new node
-    
+
+    if (curr == nullptr)
+      return false;
     addBefore(newNode, curr);
 
     curr = nullptr;
@@ -179,6 +182,20 @@ bool SkipList::add(int value) {
 
   return true;
 }
+
+// This will return the pointer that has the node less than the value
+// The Node pointer must not be null pointer
+// If is the same value then it will return a nullptr
+SNode *SkipList::getPrevNode(SNode *minPointer, int &value) const {
+  while (minPointer->forward != nullptr && minPointer->value <= value) {
+
+    minPointer = minPointer->forward;
+  }
+  if (minPointer->value == value)
+    return nullptr;
+  return minPointer;
+}
+
 // Given a SNode, place it before the given Previous Node
 void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
   // Link next to node in front
@@ -187,7 +204,10 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
   PrevNode->forward = NewNode;
   // point the new nodes back to
   NewNode->backward = PrevNode;
-  
+
+  if (NewNode->forward != nullptr)
+    NewNode->forward->backward = NewNode;
+
   // If the newNode's value is larger than the tail the tail
   // gets pointed to the new node
   if (NewNode->value > tail->value) {

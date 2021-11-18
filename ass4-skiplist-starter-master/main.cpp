@@ -29,7 +29,7 @@ void test1() {
 
 int main() {
   SkipList skp(5, 50);
-  skp.add(vector<int>{1, 3, 5, 2, 7, -1});
+  skp.add(vector<int>{1, 3, 4, 4, 2, 7, -1});
 
   // skp.add(4);
   // skp.add(3);

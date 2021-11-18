@@ -89,7 +89,7 @@ private:
   // for p = 50, each node has a 50% chance of being at higher level
   bool shouldInsertAtHigher() const;
 
-  void goHigher(SNode * a, int level);
+  void goHigher(SNode *a, int level);
 
   // connect 2 nodes in a line
   static void connect2AtLevel(SNode *a, SNode *b, int level);
@@ -98,6 +98,8 @@ private:
   static void connect3AtLevel(SNode *a, SNode *b, SNode *c, int level);
 
   SNode *containsSNode(int data) const;
+
+  SNode *getPrevNode(SNode *minPointer, int &value) const;
 
   vector<SNode *> getBeforeNodes(int data) const;
 
