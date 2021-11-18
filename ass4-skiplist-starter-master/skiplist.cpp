@@ -126,7 +126,16 @@ bool SkipList::shouldInsertAtHigher() const {
   return rand() % 100 < probability;
 }
 
-// bool SkipList::add(const vector<int> &values) { return true; }
+bool SkipList::add(const vector<int> &values) {
+  bool result = values.size() > 0;
+  if (!result)
+    return false;
+  for (int val : values) {
+    add(val);
+  }
+
+  return true;
+}
 
 bool SkipList::add(int value) {
   // if (this->contains(value))

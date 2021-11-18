@@ -29,13 +29,14 @@ void test1() {
 
 int main() {
   SkipList skp(5, 50);
+  skp.add(vector<int>{1, 3, 5, 2, 3, -1});
 
-  skp.add(4);
-  skp.add(3);
-  skp.add(5);
-  skp.add(2);
-  skp.add(3);
-  skp.add(-1);
+  // skp.add(4);
+  // skp.add(3);
+  // skp.add(5);
+  // skp.add(2);
+  // skp.add(3);
+  // skp.add(-1);
 
   cout << skp << endl;
 
