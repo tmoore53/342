@@ -173,14 +173,23 @@ bool SkipList::add(int value) {
     // New Node's next will point to the current pointer's next
     // Current pointer should be less than the new node
 
-    if (curr == nullptr)
+    if (curr == nullptr) {
+      delete newNode;
+      newNode = nullptr;
+
       return false;
+    }
     addBefore(newNode, curr);
 
     curr = nullptr;
   }
 
   return true;
+}
+
+void SkipList::goHigher(SNode *a, int level) {
+  while (shouldInsertAtHigher()) {
+  }
 }
 
 // This will return the pointer that has the node less than the value
@@ -216,10 +225,7 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
   }
 }
 
-void SkipList::goHigher(SNode *a, int level) {
-  while (shouldInsertAtHigher()) {
-  }
-}
+
 
 SkipList::~SkipList() {
   // need to delete individual nodes
