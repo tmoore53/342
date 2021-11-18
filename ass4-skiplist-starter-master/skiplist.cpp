@@ -115,11 +115,6 @@ SkipList::SkipList(int maxLevel, int probability)
 
     iNT_MAX.push_back(nullptr);
   }
-
-  cout << "Int min and max size: " << endl;
-
-  cout << iNT_MIN.size() << endl;
-  cout << iNT_MAX.size() << endl;
 }
 
 bool SkipList::shouldInsertAtHigher() const {
@@ -148,15 +143,18 @@ bool SkipList::add(int value) {
     tail = head;
     iNT_MIN[0] = head;
     iNT_MAX[0] = head;
+    goHigher(newNode, 1);
+
   } else if (head->value > value) {
     newNode->forward = head;
     newNode->forward->backward = newNode;
     head = newNode;
     iNT_MIN[0] = head;
+    goHigher(newNode, 1);
+
   } else {
     // Start at the head
-    SNode *curr = head;
-
+    SNode *curr = iNT_MIN[0];
     /* Keep looking forward if the current node is not null and
     less than the value*/
     curr = getPrevNode(curr, value);
@@ -169,7 +167,7 @@ bool SkipList::add(int value) {
     }
     addBefore(newNode, curr);
 
-    goHigher(curr, 1);
+    goHigher(newNode, 1);
     curr = nullptr;
   }
 
@@ -178,13 +176,27 @@ bool SkipList::add(int value) {
 
 void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
+    SNode *newptr = new SNode(a->value);
     if (iNT_MIN[level] == nullptr) {
-      SNode *newptr = new SNode(a->value);
-
       iNT_MIN[level] = newptr;
       iNT_MAX[level] = newptr;
       a->up = newptr;
       newptr->down = a;
+    } else if (iNT_MIN[level]->value > a->value) {
+      newptr->forward = iNT_MIN[level];
+      iNT_MIN[level]->backward = newptr;
+      iNT_MIN[level] = newptr;
+      a->up = newptr;
+      newptr->down = a;
+    } else {
+      SNode *curr = iNT_MIN[level];
+      curr = getPrevNode(curr, a->value);
+      if (curr == nullptr) {
+        delete newptr;
+        newptr = nullptr;
+        break;
+      }
+      addBefore(newptr, curr);
     }
     level++;
   }
@@ -194,8 +206,8 @@ void SkipList::goHigher(SNode *a, int level) {
 // The Node pointer must not be null pointer
 // If is the same value then it will return a nullptr
 SNode *SkipList::getPrevNode(SNode *minPointer, int &value) const {
-  while (minPointer->forward != nullptr && minPointer->value <= value) {
-
+  while (minPointer->forward != nullptr &&
+         minPointer->forward->value <= value) {
     minPointer = minPointer->forward;
   }
   if (minPointer->value == value)
@@ -225,14 +237,12 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
 
 SkipList::~SkipList() {
   // need to delete individual nodes
-  for (int level{maxLevel - 1}; level >= 0; level--) {
-    SNode *curr = iNT_MIN[level];
-    while (curr != nullptr) {
-      SNode *next = curr->forward;
-      delete curr;
-      curr = next;
-      next = nullptr;
-    }
+  SNode *curr = head;
+  while (curr != nullptr) {
+    SNode *next = curr->forward;
+    delete curr;
+    curr = next;
+    next = nullptr;
   }
 
   // Head is already deleted
@@ -242,8 +252,8 @@ SkipList::~SkipList() {
   this->iNT_MIN.clear();
   iNT_MIN.shrink_to_fit();
 
-  // head = nullptr;
-  // curr = nullptr;
+  head = nullptr;
+  curr = nullptr;
 }
 
 // bool SkipList::remove(int data) { return true; }
