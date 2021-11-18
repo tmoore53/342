@@ -160,18 +160,6 @@ bool SkipList::add(int value) {
     /* Keep looking forward if the current node is not null and
     less than the value*/
     curr = getPrevNode(curr, value);
-    // while (curr->forward != nullptr && curr->forward->value <= value) {
-    //   /* If the value is next value is equal then delete node, exit, and
-    //    return false */
-    //   if (curr->forward->value == newNode->value) {
-    //     delete newNode;
-    //     return false;
-    //   }
-    //   // Keep traversing if the node ahead is less than and not null
-    //   curr = curr->forward;
-    // }
-    // New Node's next will point to the current pointer's next
-    // Current pointer should be less than the new node
 
     if (curr == nullptr) {
       delete newNode;
@@ -181,6 +169,7 @@ bool SkipList::add(int value) {
     }
     addBefore(newNode, curr);
 
+    goHigher(curr, 1);
     curr = nullptr;
   }
 
@@ -188,7 +177,16 @@ bool SkipList::add(int value) {
 }
 
 void SkipList::goHigher(SNode *a, int level) {
-  while (shouldInsertAtHigher()) {
+  while (shouldInsertAtHigher() && level < maxLevel) {
+    SNode *newptr = new SNode(a->value);
+    if (iNT_MIN[level] == nullptr) {
+
+      iNT_MIN[level] = newptr;
+      iNT_MAX[level] = newptr;
+      a->up = newptr;
+      newptr->down = a;
+    }
+    level++;
   }
 }
 
@@ -224,8 +222,6 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
     iNT_MAX[0] = tail;
   }
 }
-
-
 
 SkipList::~SkipList() {
   // need to delete individual nodes
