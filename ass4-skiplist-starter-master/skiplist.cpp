@@ -14,15 +14,24 @@
 using namespace std;
 
 ostream &operator<<(ostream &Out, const SkipList &SkipL) {
-  Out << "Level: " + to_string(1);
-  Out << " -- ";
-  SNode *Curr = SkipL.head;
+  for (int level{SkipL.maxLevel - 1}; level >= 0; level--) {
 
-  while (Curr != nullptr) {
-    Out << to_string(Curr->value) + ", ";
-    Curr = Curr->forward;
+    Out << "Level: " + to_string(level);
+    Out << " -- ";
+    if (SkipL.iNT_MIN[level] != nullptr) {
+      SNode *Curr = SkipL.iNT_MIN[level];
+
+      while (Curr != nullptr) {
+        Out << to_string(Curr->value) + ", ";
+        if (Curr == SkipL.tail) {
+          Out << "<-- Tail";
+        }
+        Curr = Curr->forward;
+      }
+    }
+    Out << "\n";
   }
-  Out << "\n";
+
   return Out;
 }
 
@@ -100,9 +109,6 @@ SkipList::SkipList(int maxLevel, int probability)
   // SNode *temp = new SNode(NULL);
   // SNode *temp2 = new SNode(NULL);
 
-  vector<SNode *> iNT_MIN;
-  vector<SNode *> iNT_MAX;
-
   for (int level{maxLevel}; level > 0; level--) {
 
     iNT_MIN.push_back(nullptr);
@@ -130,14 +136,14 @@ bool SkipList::add(int value) {
 
   if (head == nullptr) {
     head = newNode;
-    // newNode->backward = iNT_MIN[0];
-    // newNode->forward = iNT_MIN[0];
-
+    tail = head;
+    iNT_MIN[0] = head;
+    iNT_MAX[0] = head;
   } else if (head->value > value) {
-    // newNode->backward = iNT_MIN[0];
     newNode->forward = head;
     newNode->forward->backward = newNode;
     head = newNode;
+    iNT_MIN[0] = head;
   } else {
     SNode *curr = head;
     while (curr->forward != nullptr && curr->forward->value <= value) {
@@ -147,13 +153,27 @@ bool SkipList::add(int value) {
       }
       curr = curr->forward;
     }
+    // New Node's next will point to the current pointer's next
 
     newNode->forward = curr->forward;
-    if (curr->forward != nullptr)
-      newNode->forward->backward = curr->backward;
 
+    // if the current node's next is not null then have the
+    // current node's previous point back to the new node
+    if (curr->forward != nullptr) {
+
+      newNode->forward->backward = curr->backward;
+    }
+
+    // point the current node to the new node
     curr->forward = newNode;
+    // point the new nodes back to
     newNode->backward = curr;
+    // If the newNode's value is larger than the tail the tail
+    // gets pointed to the new node
+    if (value > tail->value) {
+      tail = newNode;
+      iNT_MAX[0] = tail;
+    }
 
     curr = nullptr;
   }
