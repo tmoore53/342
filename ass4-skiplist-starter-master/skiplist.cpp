@@ -178,8 +178,8 @@ bool SkipList::add(int value) {
 
 void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
-    SNode *newptr = new SNode(a->value);
     if (iNT_MIN[level] == nullptr) {
+      SNode *newptr = new SNode(a->value);
 
       iNT_MIN[level] = newptr;
       iNT_MAX[level] = newptr;
@@ -225,12 +225,14 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
 
 SkipList::~SkipList() {
   // need to delete individual nodes
-  SNode *curr = head;
-  while (curr != nullptr) {
-    SNode *next = curr->forward;
-    delete curr;
-    curr = next;
-    next = nullptr;
+  for (int level{maxLevel - 1}; level >= 0; level--) {
+    SNode *curr = iNT_MIN[level];
+    while (curr != nullptr) {
+      SNode *next = curr->forward;
+      delete curr;
+      curr = next;
+      next = nullptr;
+    }
   }
 
   // Head is already deleted
@@ -240,8 +242,8 @@ SkipList::~SkipList() {
   this->iNT_MIN.clear();
   iNT_MIN.shrink_to_fit();
 
-  head = nullptr;
-  curr = nullptr;
+  // head = nullptr;
+  // curr = nullptr;
 }
 
 // bool SkipList::remove(int data) { return true; }
