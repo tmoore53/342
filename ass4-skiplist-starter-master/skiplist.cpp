@@ -174,6 +174,7 @@ bool SkipList::add(int value) {
   return true;
 }
 
+/* Memory Leaks are occuring here! at the else if and the else */
 void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
     SNode *newptr = new SNode(a->value);
@@ -182,7 +183,7 @@ void SkipList::goHigher(SNode *a, int level) {
       iNT_MAX[level] = newptr;
       a->up = newptr;
       newptr->down = a;
-    } else if (iNT_MIN[level]->value > a->value) {
+    } else if (iNT_MIN[level]->value > newptr->value) {
       newptr->forward = iNT_MIN[level];
       iNT_MIN[level]->backward = newptr;
       iNT_MIN[level] = newptr;
@@ -191,6 +192,8 @@ void SkipList::goHigher(SNode *a, int level) {
     } else {
       SNode *curr = iNT_MIN[level];
       curr = getPrevNode(curr, a->value);
+      // If it returns a null pointer then there was a
+      // repeat of numbers trying to be entered
       if (curr == nullptr) {
         delete newptr;
         newptr = nullptr;
@@ -237,23 +240,26 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
 
 SkipList::~SkipList() {
   // need to delete individual nodes
-  SNode *curr = head;
-  while (curr != nullptr) {
-    SNode *next = curr->forward;
-    delete curr;
-    curr = next;
-    next = nullptr;
-  }
+  for (int level{maxLevel - 1}; level >= 0; level--) {
 
-  // Head is already deleted
-  // delete head;
+    if (iNT_MIN[level] != nullptr) {
+      SNode *curr = iNT_MIN[level];
+
+      while (curr != nullptr) {
+        SNode *next = curr->forward;
+        delete curr;
+        curr = next;
+        next = nullptr;
+      }
+      curr = nullptr;
+    }
+  }
   this->iNT_MAX.clear();
   iNT_MAX.shrink_to_fit();
   this->iNT_MIN.clear();
   iNT_MIN.shrink_to_fit();
 
   head = nullptr;
-  curr = nullptr;
 }
 
 // bool SkipList::remove(int data) { return true; }
