@@ -80,12 +80,10 @@ int SNode::height() const {
   while (this->forward != nullptr) {
     height++;
   }
-
   int height2{0};
   while (this->backward != nullptr) {
     height2++;
   }
-
   height = (height > height2) ? height : height2;
 
   return height;
@@ -159,7 +157,10 @@ bool SkipList::add(int value) {
     less than the value*/
     curr = getPrevNode(curr, value);
 
-    if (curr == nullptr) {
+    // If it returns a pointer with the same value
+    // then the new node will delete
+
+    if (curr->value == value) {
       delete newNode;
       newNode = nullptr;
 
@@ -194,12 +195,11 @@ void SkipList::goHigher(SNode *a, int level) {
       curr = getPrevNode(curr, a->value);
       // If it returns a null pointer then there was a
       // repeat of numbers trying to be entered
-      if (curr == nullptr) {
-        delete newptr;
-        newptr = nullptr;
-        break;
-      }
+
       addBefore(newptr, curr);
+      a->up = newptr;
+      newptr->down = a;
+      a = a->up;
     }
     level++;
   }
@@ -213,8 +213,8 @@ SNode *SkipList::getPrevNode(SNode *minPointer, int &value) const {
          minPointer->forward->value <= value) {
     minPointer = minPointer->forward;
   }
-  if (minPointer->value == value)
-    return nullptr;
+  // if (minPointer->value == value)
+  //   return nullptr;
   return minPointer;
 }
 
@@ -268,7 +268,22 @@ SkipList::~SkipList() {
 // Returns the NODE if the value exists in the SkipList.
 // Returns nullptr otherwise
 
-// SNode *SkipList::containsSNode(int data) const { return nullptr; }
+SNode *SkipList::containsSNode(int data) const {
+  int level = maxLevel - 1;
+  SNode *start = iNT_MIN[level];
+  // Start from the level that has a value;
+  while (start == nullptr) {
+    start = iNT_MIN[--level];
+  }
+
+  start = getPrevNode(start, data);
+  while (start->value != data)
+    if (start->value == data)
+      return start;
+  if (start->value < data)
+
+    return nullptr;
+}
 
 // Checks to see whether or not a data value exists in the list
 // Returns true if the value exists in the SkipList.
