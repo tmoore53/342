@@ -31,7 +31,7 @@ int main() {
   SkipList skp(5, 50);
   skp.add(vector<int>{1, 3, 4, 4,  2,  7,  -1, 9,  8,  7,  6,
                       5, 4, 1, 11, 21, 12, 12, 12, 32, 45, 65});
-  cout << skp.contains(45) << endl;
+  cout << skp.containsSNode(75) << endl;
 
   // skp.add(4);
   // skp.add(3);
@@ -39,6 +39,12 @@ int main() {
   // skp.add(2);
   // skp.add(3);
   // skp.add(-1);
+
+  cout << skp << endl;
+
+  skp.remove(11);
+  skp.remove(45);
+  skp.remove(3);
 
   cout << skp << endl;
 

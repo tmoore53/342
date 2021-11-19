@@ -262,7 +262,33 @@ SkipList::~SkipList() {
   head = nullptr;
 }
 
-// bool SkipList::remove(int data) { return true; }
+bool SkipList::remove(int data) {
+  SNode *temp = containsSNode(data);
+  if (temp == nullptr)
+    return false;
+  int level = {0};
+  while (temp->up != nullptr) {
+
+    temp->backward->forward = temp->forward;
+
+    SNode *tempUp = temp->up;
+    delete temp;
+    temp = tempUp;
+    level++;
+  }
+  if (temp->forward == nullptr && temp->backward == nullptr)
+    iNT_MIN[level] = nullptr;
+  else if (temp->forward != nullptr && temp->backward == nullptr) {
+    iNT_MIN[level] = temp->forward;
+    iNT_MIN[level]->backward = nullptr;
+  } else if (temp->backward != nullptr && temp->forward == nullptr) {
+    temp->backward->forward = iNT_MAX[level];
+  }
+
+  delete temp;
+  temp = nullptr;
+  return true;
+}
 
 // Checks to see whether or not a data value exists in the list
 // Returns the NODE if the value exists in the SkipList.
@@ -276,11 +302,22 @@ SNode *SkipList::containsSNode(int data) const {
     start = iNT_MIN[--level];
   }
   while (start != nullptr) {
-    start = getPrevNode(start, data);
-    if (start->forward->value == data)
-      return start->forward;
-
+    if (start->value <= data) {
+      start = getPrevNode(start, data);
+      if (start->value == data) {
+        while (start->down != nullptr) {
+          start = start->down;
+        }
+        return start;
+      }
+    }
     start = start->down;
+    level--;
+    while (level > 0 && start->value > data && start != iNT_MIN[level]) {
+      start = start->backward;
+    }
+    if (start != nullptr)
+      start = getPrevNode(start, data);
   }
 
   return nullptr;
