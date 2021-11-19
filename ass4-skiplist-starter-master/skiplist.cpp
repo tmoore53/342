@@ -272,17 +272,18 @@ SNode *SkipList::containsSNode(int data) const {
   int level = maxLevel - 1;
   SNode *start = iNT_MIN[level];
   // Start from the level that has a value;
-  while (start == nullptr) {
+  while (start == nullptr && iNT_MIN[0] != nullptr) {
     start = iNT_MIN[--level];
   }
+  while (start != nullptr) {
+    start = getPrevNode(start, data);
+    if (start->forward->value == data)
+      return start->forward;
 
-  start = getPrevNode(start, data);
-  while (start->value != data)
-    if (start->value == data)
-      return start;
-  if (start->value < data)
+    start = start->down;
+  }
 
-    return nullptr;
+  return nullptr;
 }
 
 // Checks to see whether or not a data value exists in the list

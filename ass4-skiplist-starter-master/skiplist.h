@@ -97,13 +97,13 @@ private:
   // connect 3 nodes in a line
   static void connect3AtLevel(SNode *a, SNode *b, SNode *c, int level);
 
-  SNode *containsSNode(int data) const;
-
   SNode *getPrevNode(SNode *minPointer, int &value) const;
 
   vector<SNode *> getBeforeNodes(int data) const;
 
 public:
+  SNode *containsSNode(int data) const;
+
   // default SkipList has only 1 level, just one doubly-linked list
   explicit SkipList(int maxLevel = 1, int probability = 0);
 
