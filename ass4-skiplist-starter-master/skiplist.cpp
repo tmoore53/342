@@ -286,7 +286,9 @@ bool SkipList::remove(int data) {
     iNT_MIN[level] = temp->forward;
     iNT_MIN[level]->backward = nullptr;
   } else if (temp->backward != nullptr && temp->forward == nullptr) {
-    temp->backward->forward = iNT_MAX[level];
+    temp->backward->forward = temp->forward;
+  } else {
+    temp->backward->forward = temp->forward;
   }
 
   delete temp;

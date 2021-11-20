@@ -1,72 +1,15 @@
-==10147== Memcheck, a memory error detector
-==10147== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==10147== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
-==10147== Command: ./a.out
-==10147== Parent PID: 10078
-==10147== 
-==10147== Invalid read of size 4
-==10147==    at 0x10ADA4: operator<<(std::ostream&, SkipList const&) (skiplist.cpp:25)
-==10147==    by 0x10A495: main (main.cpp:49)
-==10147==  Address 0x4d69e20 is 0 bytes inside a block of size 40 free'd
-==10147==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==10147==    by 0x10B911: SkipList::remove(int) (skiplist.cpp:292)
-==10147==    by 0x10A46B: main (main.cpp:46)
-==10147==  Block was alloc'd at
-==10147==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==10147==    by 0x10B393: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==10147==    by 0x10B330: SkipList::add(int) (skiplist.cpp:171)
-==10147==    by 0x10B155: SkipList::add(std::vector<int, std::allocator<int> > const&) (skiplist.cpp:127)
-==10147==    by 0x10A3C8: main (main.cpp:32)
-==10147== 
-==10147== Invalid read of size 8
-==10147==    at 0x10AE27: operator<<(std::ostream&, SkipList const&) (skiplist.cpp:29)
-==10147==    by 0x10A495: main (main.cpp:49)
-==10147==  Address 0x4d69e28 is 8 bytes inside a block of size 40 free'd
-==10147==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==10147==    by 0x10B911: SkipList::remove(int) (skiplist.cpp:292)
-==10147==    by 0x10A46B: main (main.cpp:46)
-==10147==  Block was alloc'd at
-==10147==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==10147==    by 0x10B393: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==10147==    by 0x10B330: SkipList::add(int) (skiplist.cpp:171)
-==10147==    by 0x10B155: SkipList::add(std::vector<int, std::allocator<int> > const&) (skiplist.cpp:127)
-==10147==    by 0x10A3C8: main (main.cpp:32)
-==10147== 
-==10147== Invalid read of size 8
-==10147==    at 0x10B6D0: SkipList::~SkipList() (skiplist.cpp:249)
-==10147==    by 0x10A4E6: main (main.cpp:31)
-==10147==  Address 0x4d69e28 is 8 bytes inside a block of size 40 free'd
-==10147==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==10147==    by 0x10B911: SkipList::remove(int) (skiplist.cpp:292)
-==10147==    by 0x10A46B: main (main.cpp:46)
-==10147==  Block was alloc'd at
-==10147==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==10147==    by 0x10B393: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==10147==    by 0x10B330: SkipList::add(int) (skiplist.cpp:171)
-==10147==    by 0x10B155: SkipList::add(std::vector<int, std::allocator<int> > const&) (skiplist.cpp:127)
-==10147==    by 0x10A3C8: main (main.cpp:32)
-==10147== 
-==10147== Invalid free() / delete / delete[] / realloc()
-==10147==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==10147==    by 0x10B6E3: SkipList::~SkipList() (skiplist.cpp:250)
-==10147==    by 0x10A4E6: main (main.cpp:31)
-==10147==  Address 0x4d69e20 is 0 bytes inside a block of size 40 free'd
-==10147==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==10147==    by 0x10B911: SkipList::remove(int) (skiplist.cpp:292)
-==10147==    by 0x10A46B: main (main.cpp:46)
-==10147==  Block was alloc'd at
-==10147==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==10147==    by 0x10B393: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==10147==    by 0x10B330: SkipList::add(int) (skiplist.cpp:171)
-==10147==    by 0x10B155: SkipList::add(std::vector<int, std::allocator<int> > const&) (skiplist.cpp:127)
-==10147==    by 0x10A3C8: main (main.cpp:32)
-==10147== 
-==10147== 
-==10147== HEAP SUMMARY:
-==10147==     in use at exit: 0 bytes in 0 blocks
-==10147==   total heap usage: 46 allocs, 48 frees, 78,528 bytes allocated
-==10147== 
-==10147== All heap blocks were freed -- no leaks are possible
-==10147== 
-==10147== For counts of detected and suppressed errors, rerun with: -v
-==10147== ERROR SUMMARY: 8 errors from 4 contexts (suppressed: 0 from 0)
+==22081== Memcheck, a memory error detector
+==22081== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==22081== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==22081== Command: ./a.out
+==22081== Parent PID: 21996
+==22081== 
+==22081== 
+==22081== HEAP SUMMARY:
+==22081==     in use at exit: 0 bytes in 0 blocks
+==22081==   total heap usage: 46 allocs, 46 frees, 78,528 bytes allocated
+==22081== 
+==22081== All heap blocks were freed -- no leaks are possible
+==22081== 
+==22081== For counts of detected and suppressed errors, rerun with: -v
+==22081== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
