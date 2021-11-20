@@ -262,6 +262,10 @@ SkipList::~SkipList() {
   head = nullptr;
 }
 
+// Remove has memory leaks
+// <<<<<---------------------------------------------------******************
+// fix this
+
 bool SkipList::remove(int data) {
   SNode *temp = containsSNode(data);
   if (temp == nullptr)

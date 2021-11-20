@@ -1,3 +1,42 @@
+Fri 19 Nov 2021 05:22:58 PM PST
+Linux csslab6h 4.19.0-17-amd64 #1 SMP Debian 4.19.194-3 (2021-07-18) x86_64 GNU/Linux
+uid=1076553(tmoore53) gid=2121076553(tmoore53) groups=2121076553(tmoore53),605559(lab-access)
+=====================================================
+1. Compiles without warnings with -Wall -Wextra flags
+=====================================================
+=====================================================
+2. Runs and produces correct output
+=====================================================
+0
+Level: 4 -- 
+Level: 3 -- 11, 
+Level: 2 -- 9, 11, 21, 
+Level: 1 -- 2, 7, 8, 9, 11, 21, 32, 45, 65, 
+Level: 0 -- -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 32, 45, 65, <-- Tail
+
+Level: 4 -- 
+Level: 3 -- 
+Level: 2 -- 9, 21, 
+Level: 1 -- 2, 7, 8, 9, 21, 32, -413830016, 1795, 
+Level: 0 -- -1, 1, 2, -413829968, 1795, 
+
+Done.
+free(): double free detected in tcache 2
+./create-output.sh: line 69: 239253 Aborted                 $EXEC_PROGRAM
+=====================================================
+3. clang-tidy warnings are fixed
+=====================================================
+=====================================================
+4. clang-format does not find any formatting issues
+=====================================================
+Running clang-format on ./main.cpp
+Running clang-format on ./skiplist.cpp
+=====================================================
+5. No memory leaks using g++
+=====================================================
+=====================================================
+6. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
 ==239301== Memcheck, a memory error detector
 ==239301== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==239301== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
@@ -70,3 +109,13 @@
 ==239301== 
 ==239301== For counts of detected and suppressed errors, rerun with: -v
 ==239301== ERROR SUMMARY: 8 errors from 4 contexts (suppressed: 0 from 0)
+=====================================================
+7. Tests have full code coverage
+=====================================================
+./create-output.sh: line 134: ./check-code-coverage.sh: Permission denied
+Fri 19 Nov 2021 05:23:05 PM PST
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================
