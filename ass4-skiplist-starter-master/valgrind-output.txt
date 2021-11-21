@@ -1,40 +1,15 @@
-==50286== Memcheck, a memory error detector
-==50286== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==50286== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
-==50286== Command: ./a.out
-==50286== Parent PID: 50197
-==50286== 
-==50286== Invalid read of size 4
-==50286==    at 0x10BED2: SkipList::containsSNode(int) const (skiplist.cpp:322)
-==50286==    by 0x10BF6B: SkipList::contains(int) const (skiplist.cpp:337)
-==50286==    by 0x10A575: test1() (main.cpp:20)
-==50286==    by 0x10A8AF: main (main.cpp:53)
-==50286==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==50286== 
-==50286== 
-==50286== Process terminating with default action of signal 11 (SIGSEGV)
-==50286==  Access not within mapped region at address 0x0
-==50286==    at 0x10BED2: SkipList::containsSNode(int) const (skiplist.cpp:322)
-==50286==    by 0x10BF6B: SkipList::contains(int) const (skiplist.cpp:337)
-==50286==    by 0x10A575: test1() (main.cpp:20)
-==50286==    by 0x10A8AF: main (main.cpp:53)
-==50286==  If you believe this happened as a result of a stack
-==50286==  overflow in your program's main thread (unlikely but
-==50286==  possible), you can try to increase the size of the
-==50286==  main thread stack using the --main-stacksize= flag.
-==50286==  The main thread stack size used in this run was 8388608.
-==50286== 
-==50286== HEAP SUMMARY:
-==50286==     in use at exit: 1,656 bytes in 39 blocks
-==50286==   total heap usage: 66 allocs, 27 frees, 79,168 bytes allocated
-==50286== 
-==50286== LEAK SUMMARY:
-==50286==    definitely lost: 0 bytes in 0 blocks
-==50286==    indirectly lost: 0 bytes in 0 blocks
-==50286==      possibly lost: 0 bytes in 0 blocks
-==50286==    still reachable: 1,656 bytes in 39 blocks
-==50286==         suppressed: 0 bytes in 0 blocks
-==50286== Rerun with --leak-check=full to see details of leaked memory
-==50286== 
-==50286== For counts of detected and suppressed errors, rerun with: -v
-==50286== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==54018== Memcheck, a memory error detector
+==54018== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==54018== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==54018== Command: ./a.out
+==54018== Parent PID: 53917
+==54018== 
+==54018== 
+==54018== HEAP SUMMARY:
+==54018==     in use at exit: 0 bytes in 0 blocks
+==54018==   total heap usage: 66 allocs, 66 frees, 79,168 bytes allocated
+==54018== 
+==54018== All heap blocks were freed -- no leaks are possible
+==54018== 
+==54018== For counts of detected and suppressed errors, rerun with: -v
+==54018== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

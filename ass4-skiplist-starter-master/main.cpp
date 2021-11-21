@@ -16,7 +16,7 @@ void test1() {
   // cannot add existing
   assert(!skp.add(vector<int>{1, 7}));
   cout << skp << endl;
-  cout << "7 ? " << skp.contains(7) << endl;
+  // cout << "7 ? " << skp.contains(7) << endl;
   cout << "3 ? " << skp.contains(3) << endl;
   cout << "-100 ? " << skp.contains(-100) << endl;
   cout << "100 ? " << skp.contains(100) << endl;
