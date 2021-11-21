@@ -124,10 +124,10 @@ bool SkipList::add(const vector<int> &values) {
   if (!result)
     return false;
   for (int val : values) {
-    add(val);
+    result = add(val);
   }
 
-  return true;
+  return result;
 }
 
 bool SkipList::add(int value) {
@@ -333,7 +333,9 @@ SNode *SkipList::containsSNode(int data) const {
 // Returns true if the value exists in the SkipList.
 // Returns false otherwise
 
-// bool SkipList::contains(int data) const { return true; }
+bool SkipList::contains(int data) const {
+  return containsSNode(data)->value == data;
+}
 
 // private methods to ease linking
 // void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {
