@@ -312,6 +312,10 @@ SNode *SkipList::containsSNode(int data) const {
   while (start != nullptr) {
     // If the value is less than the data that needs to be found then find
     // the value in the level that would be right before the desired value.
+    if (start != nullptr && data == 3)
+      cout << "We reached this point where level, and start  =" << level << ", "
+           << start->value << endl;
+
     if (start->value <= data) {
       start = getPrevNode(start, data);
       // If we find the value you return the node in the lowest level
@@ -321,19 +325,24 @@ SNode *SkipList::containsSNode(int data) const {
         }
         return start;
       }
-    } else if (start->value >= data) {
+    } else if (start->value >= data && start != iNT_MIN[level]) {
       while (start != nullptr && level >= 0 && start->value > data &&
              start != iNT_MIN[level]) {
         start = start->backward;
       }
-      if (start != nullptr)
-        start = getPrevNode(start, data);
+
     }
+
     if (start == nullptr)
       return nullptr;
 
-    start = start->down;
+    if (start != nullptr){
+          start = start->down;
     level--;
+
+    }
+
+
   }
 
   return nullptr;
@@ -345,8 +354,11 @@ SNode *SkipList::containsSNode(int data) const {
 
 bool SkipList::contains(int data) const {
   SNode *temp = containsSNode(data);
-  if (temp == nullptr)
+  if (temp == nullptr) {
+    cout << "We reached this point where it doesn't exist" << endl;
+
     return false;
+  }
 
   cout << "We reached this point" << endl;
   cout << temp->value << endl;
