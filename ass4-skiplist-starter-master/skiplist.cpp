@@ -319,7 +319,8 @@ SNode *SkipList::containsSNode(int data) const {
     }
     start = start->down;
     level--;
-    while (level > 0 && start->value > data && start != iNT_MIN[level]) {
+    while (start != nullptr && level > 0 && start->value > data &&
+           start != iNT_MIN[level]) {
       start = start->backward;
     }
     if (start != nullptr)
@@ -334,7 +335,10 @@ SNode *SkipList::containsSNode(int data) const {
 // Returns false otherwise
 
 bool SkipList::contains(int data) const {
-  return containsSNode(data)->value == data;
+  SNode *temp = containsSNode(data);
+  if (temp == nullptr)
+    return false;
+  return temp->value == data;
 }
 
 // private methods to ease linking
