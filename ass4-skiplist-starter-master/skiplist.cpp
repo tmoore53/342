@@ -176,7 +176,7 @@ bool SkipList::add(int value) {
 }
 
 /* Memory Leaks are occuring here! at the else if and the else */
-void SkipList::goHigher(SNode *&a, int level) {
+void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
     SNode *newptr = new SNode(a->value);
     if (iNT_MIN[level] == nullptr) {
@@ -184,12 +184,16 @@ void SkipList::goHigher(SNode *&a, int level) {
       iNT_MAX[level] = newptr;
       a->up = newptr;
       newptr->down = a;
+      a = a->up;
+
     } else if (iNT_MIN[level]->value > newptr->value) {
       newptr->forward = iNT_MIN[level];
       iNT_MIN[level]->backward = newptr;
       iNT_MIN[level] = newptr;
       a->up = newptr;
       newptr->down = a;
+      a = a->up;
+
     } else {
       SNode *curr = iNT_MIN[level];
       curr = getPrevNode(curr, a->value);
