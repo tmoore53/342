@@ -267,6 +267,10 @@ bool SkipList::remove(int data) {
 
     temp->backward->forward = temp->forward;
 
+    if (temp->forward != nullptr) {
+      temp->forward->backward = temp->backward;
+    }
+
     SNode *tempUp = temp->up;
     delete temp;
     temp = tempUp;
