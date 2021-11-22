@@ -89,6 +89,13 @@ private:
   // for p = 50, each node has a 50% chance of being at higher level
   bool shouldInsertAtHigher() const;
 
+  /**
+   * @brief This function determines if the integer will
+   *  go higher in the skip list and link them to the
+   *
+   * @param a
+   * @param level
+   */
   void goHigher(SNode *a, int level);
 
   // connect 2 nodes in a line

@@ -248,10 +248,13 @@ SkipList::~SkipList() {
   head = nullptr;
 }
 
-// Remove has memory leaks when deleting
-// <<<<<---------------------------------------------------******************
-// fix this
-
+/**
+ * @brief removes data in the skiplist
+ *
+ * @param data
+ * @return true
+ * @return false
+ */
 bool SkipList::remove(int data) {
   SNode *temp = containsSNode(data);
   if (temp == nullptr) {
@@ -289,7 +292,6 @@ bool SkipList::remove(int data) {
 // Checks to see whether or not a data value exists in the list
 // Returns the NODE if the value exists in the SkipList.
 // Returns nullptr otherwise
-
 SNode *SkipList::containsSNode(int data) const {
   int level = maxLevel - 1;
   SNode *start = iNT_MIN[level];
@@ -297,8 +299,6 @@ SNode *SkipList::containsSNode(int data) const {
   while (start == nullptr && iNT_MIN[0] != nullptr) {
     start = iNT_MIN[--level];
   }
-
-  //
   while (start != nullptr) {
     // If the value is less than the data that needs to be found then find
     // the value in the level that would be right before the desired value.

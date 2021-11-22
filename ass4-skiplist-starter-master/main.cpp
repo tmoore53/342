@@ -22,15 +22,18 @@ void test1() {
   cout << "100 ? " << skp.contains(100) << endl;
   bool result = skp.remove(5);
   assert(result);
-  result = skp.remove(15);
+  result = skp.remove(5);
   assert(!result);
   cout << skp << endl;
 
-  cout << "Test1 Done." << endl;
+  cout << "Test1 Done.\n" << endl;
 }
 
+/**
+ * @brief Testing with more numbers
+ *
+ */
 void test2() {
-  // setting seed for easy testing
   srand(10000);
 
   SkipList skp1(5, 50);
@@ -46,7 +49,7 @@ void test2() {
 
   cout << skp1 << endl;
   cout << "75 ? " << skp1.contains(75) << endl;
-  cout << "7 ? " << skp1.contains(75) << endl;
+  cout << "7 ? " << skp1.contains(7) << endl;
 
   skp1.remove(11);
   skp1.remove(45);
@@ -54,7 +57,7 @@ void test2() {
 
   cout << skp1 << endl;
 
-  cout << "Test2 Done." << endl;
+  cout << "Test2 Done. \n" << endl;
 }
 
 int main() {
