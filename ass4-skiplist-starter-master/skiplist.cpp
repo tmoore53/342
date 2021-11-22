@@ -136,14 +136,14 @@ bool SkipList::add(int value) {
 
   SNode *newNode = new SNode(value);
 
-  if (head == nullptr) {
+  if (iNT_MIN[0] == nullptr) {
     head = newNode;
     tail = head;
     iNT_MIN[0] = head;
     iNT_MAX[0] = head;
     goHigher(newNode, 1);
 
-  } else if (head->value > value) {
+  } else if (iNT_MIN[0]->value > value) {
     newNode->forward = head;
     newNode->forward->backward = newNode;
     head = newNode;
@@ -176,7 +176,7 @@ bool SkipList::add(int value) {
 }
 
 /* Memory Leaks are occuring here! at the else if and the else */
-void SkipList::goHigher(SNode *a, int level) {
+void SkipList::goHigher(SNode *&a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
     SNode *newptr = new SNode(a->value);
     if (iNT_MIN[level] == nullptr) {
@@ -184,12 +184,14 @@ void SkipList::goHigher(SNode *a, int level) {
       iNT_MAX[level] = newptr;
       a->up = newptr;
       newptr->down = a;
+      a = newptr;
     } else if (iNT_MIN[level]->value > newptr->value) {
       newptr->forward = iNT_MIN[level];
       iNT_MIN[level]->backward = newptr;
       iNT_MIN[level] = newptr;
       a->up = newptr;
       newptr->down = a;
+      a = newptr;
     } else {
       SNode *curr = iNT_MIN[level];
       curr = getPrevNode(curr, a->value);
@@ -200,6 +202,7 @@ void SkipList::goHigher(SNode *a, int level) {
       a->up = newptr;
       newptr->down = a;
       a = a->up;
+      a = newptr;
     }
     level++;
   }
@@ -322,6 +325,7 @@ SNode *SkipList::containsSNode(int data) const {
       if (start->value == data) {
         while (start->down != nullptr) {
           start = start->down;
+          level--;
         }
         return start;
       }
@@ -330,19 +334,15 @@ SNode *SkipList::containsSNode(int data) const {
              start != iNT_MIN[level]) {
         start = start->backward;
       }
-
     }
 
     if (start == nullptr)
       return nullptr;
 
-    if (start != nullptr){
-          start = start->down;
-    level--;
-
+    if (start != nullptr) {
+      start = start->down;
+      level--;
     }
-
-
   }
 
   return nullptr;
@@ -355,16 +355,8 @@ SNode *SkipList::containsSNode(int data) const {
 bool SkipList::contains(int data) const {
   SNode *temp = containsSNode(data);
   if (temp == nullptr) {
-    cout << "We reached this point where it doesn't exist" << endl;
-
     return false;
   }
-
-  cout << "We reached this point" << endl;
-  cout << temp->value << endl;
-  cout << data << endl;
-  cout << containsSNode(data)->value << endl;
-
   return temp->value == data;
 }
 

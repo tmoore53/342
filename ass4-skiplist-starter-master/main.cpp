@@ -30,25 +30,25 @@ void test1() {
 }
 
 int main() {
-  SkipList skp(5, 50);
-  //skp.add(
-  //     vector<int>{1, 3, 4, 2, 7, -1, 9, 8, 6, 5, 1, 11, 21, 12, 32, 45, 65});
-  // // cout << skp.containsSNode(75) << endl;
+  SkipList skp1(5, 50);
+  skp1.add(
+      vector<int>{1, 3, 4, 2, 7, -1, 9, 8, 6, 5, 1, 11, 21, 12, 32, 45, 65});
+  cout << skp1.containsSNode(75) << endl;
 
-  // // skp.add(4);
-  // // skp.add(3);
-  // // skp.add(5);
-  // // skp.add(2);
-  // // skp.add(3);
-  // // skp.add(-1);
+  skp1.add(4);
+  skp1.add(3);
+  skp1.add(5);
+  skp1.add(2);
+  skp1.add(3);
+  skp1.add(-1);
 
-  // cout << skp << endl;
+  cout << skp1 << endl;
 
-  // skp.remove(11);
-  // skp.remove(45);
-  // skp.remove(3);
+  skp1.remove(11);
+  skp1.remove(45);
+  skp1.remove(3);
 
-  cout << skp << endl;
+  cout << skp1 << endl;
 
   test1();
 
