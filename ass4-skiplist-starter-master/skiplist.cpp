@@ -19,7 +19,7 @@ using namespace std;
  *
  * @param Out : is the outstream
  * @param SkipL : is the skiplist being called
- * @return ostream&
+ * @return ostream& - desired output
  */
 ostream &operator<<(ostream &Out, const SkipList &SkipL) {
   for (int level{SkipL.maxLevel - 1}; level >= 0; level--) {
@@ -31,9 +31,6 @@ ostream &operator<<(ostream &Out, const SkipList &SkipL) {
 
       while (Curr != nullptr) {
         Out << to_string(Curr->value) + ", ";
-        if (Curr == SkipL.tail) {
-          Out << "<-- Tail";
-        }
         Curr = Curr->forward;
       }
     }
@@ -51,8 +48,8 @@ SNode::SNode(int value)
 /**
  * @brief Construct a new Skip List:: Skip List object
  *
- * @param maxLevel
- * @param probability
+ * @param maxLevel - The highest a snode can go in the skiplist
+ * @param probability - the probability for a snode to go to the next level
  */
 SkipList::SkipList(int maxLevel, int probability)
     : maxLevel{maxLevel}, probability{probability} {
@@ -73,8 +70,8 @@ SkipList::SkipList(int maxLevel, int probability)
  * @brief Creates the probabilty of the value in the first
  *  level to go up or not
  *
- * @return true
- * @return false
+ * @return true - if the snode should go up
+ * @return false - the snode should NOT go up
  */
 bool SkipList::shouldInsertAtHigher() const {
   return rand() % 100 < probability;
@@ -85,9 +82,9 @@ bool SkipList::shouldInsertAtHigher() const {
  *  Iterates through the vector and calls the
  *  add function below
  *
- * @param values
- * @return true
- * @return false
+ * @param values - vector to be added
+ * @return true - if every item was added to the skiplist
+ * @return false - if at least one value is not added
  */
 bool SkipList::add(const vector<int> &values) {
   bool result = values.size() > 0;
@@ -104,15 +101,15 @@ bool SkipList::add(const vector<int> &values) {
  * @brief This function adds a integer to a
  *  skiplist
  *
- * the function is O(n)
+ * the function is O(n*log(n)) since we wanted to check before adding
  *
- * @param value
- * @return true
- * @return false
+ * @param value - integer to add to the skiplist
+ * @return true - if the value was added successfuly
+ * @return false - if the value already exists in the skiplist
  */
 bool SkipList::add(int value) {
-  // if (this->contains(value))
-  //   return false;
+  if (this->contains(value))
+    return false;
   SNode *newNode = new SNode(value);
 
   if (head == nullptr) {
@@ -156,8 +153,8 @@ bool SkipList::add(int value) {
  * @brief This function determines if the integer will
  *  go higher in the skip list and link them to the
  *
- * @param a
- * @param level
+ * @param a - node that may go higher
+ * @param level - level to start going higher
  */
 void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
@@ -188,9 +185,18 @@ void SkipList::goHigher(SNode *a, int level) {
   }
 }
 
-// This will return the pointer that has the node less than the value
-// The Node pointer must not be null pointer
-// If is the same value then it will return a nullptr
+/**
+ * @brief
+ * // This will return the pointer that has the node less than the value
+ * // The Node pointer must not be null pointer
+ * // If is the same value then it will return a nullptr
+ *
+ * @param minPointer - Pointer to compare the the value to
+ * @param value - targeted value that we want to return a node value before or
+ * at the targeted node
+ * @return SNode* - retuern the node with a value before, at, or null pointer if
+ * not found
+ */
 SNode *SkipList::getPrevNode(SNode *&minPointer, int &value) const {
   while (minPointer->forward != nullptr &&
          minPointer->forward->value <= value) {
@@ -201,7 +207,13 @@ SNode *SkipList::getPrevNode(SNode *&minPointer, int &value) const {
   return minPointer;
 }
 
-// Given a SNode, place it before the given Previous Node
+/**
+ * @brief
+ * // Given a SNode, place it before the given Previous Node
+ *
+ * @param NewNode - Node to be added before
+ * @param PrevNode - node that will be in front of new node
+ */
 void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
   // Link next to node in front
   NewNode->forward = PrevNode->forward;
@@ -251,9 +263,9 @@ SkipList::~SkipList() {
 /**
  * @brief removes data in the skiplist
  *
- * @param data
- * @return true
- * @return false
+ * @param data - desired integer to be removed
+ * @return true - if the integer was removed from the skiplist
+ * @return false - if the integer doesn't exists
  */
 bool SkipList::remove(int data) {
   SNode *temp = containsSNode(data);
@@ -262,10 +274,6 @@ bool SkipList::remove(int data) {
     delete temp;
     temp = nullptr;
     return false;
-  }
-  if (temp->value == 3) {
-    cout << "temp = ";
-    cout << temp->value << endl;
   }
   int level = {0};
   while (temp->up != nullptr) {
@@ -284,10 +292,6 @@ bool SkipList::remove(int data) {
     level++;
     tempUp = nullptr;
   }
-  // if (temp->value == 3) {
-  //   cout << "temp = ";
-  //   cout << temp->value << endl;
-  // }
 
   if (temp->forward == nullptr && temp->backward == nullptr)
     iNT_MIN[level] = nullptr;
@@ -306,26 +310,23 @@ bool SkipList::remove(int data) {
   return true;
 }
 
-// Checks to see whether or not a data value exists in the list
-// Returns the NODE if the value exists in the SkipList.
-// Returns nullptr otherwise
+/**
+ * @brief
+ * // Checks to see whether or not a data value exists in the list
+ * // Returns the NODE if the value exists in the SkipList.
+ * // Returns nullptr otherwise
+ *
+ * @param data - targeted integer value
+ * @return SNode* - targeted snode that we want to remove/validate that the
+ * skiplist contains it
+ */
 SNode *SkipList::containsSNode(int data) const {
   int level = maxLevel - 1;
   SNode *start = iNT_MIN[level];
-  if (data == 3) {
-    cout << "============= ";
-    cout << "data == ";
-    cout << data << endl;
-  }
   // Start from the level that has the first value;
   while (start == nullptr && iNT_MIN[0] != nullptr) {
     level--;
     start = iNT_MIN[level];
-
-    if (start != nullptr && start->value == 3) {
-      cout << "starty = ";
-      cout << start->value << endl;
-    }
   }
   while (start != nullptr) {
     // If the value is less than the data that needs to be found then find
@@ -339,31 +340,44 @@ SNode *SkipList::containsSNode(int data) const {
         }
         return start;
       }
-    } else if (start->value >= data && start != iNT_MIN[level]) {
+    } // If the value is greater and not the smallest on the
+      // level go backwards
+    else if (start->value >= data && start != iNT_MIN[level]) {
       while (start->backward != nullptr && start->value > data &&
              start != iNT_MIN[level]) {
         start = start->backward;
       }
     }
+    // If we have reached the first level and have found the value
     if (start != nullptr && start->down == nullptr && start->value == data)
       return start;
-
+    // If the pointer has reached outside the skiplist then exit with null
+    // pointer
     if (start == nullptr)
       return nullptr;
 
+    // If we haven't reached the end go down a level
     if (start != nullptr) {
 
       start = start->down;
       level--;
     }
   }
+  // return the pointer allocation
   start = nullptr;
   return nullptr;
 }
 
-// Checks to see whether or not a data value exists in the list
-// Returns true if the value exists in the SkipList.
-// Returns false otherwise
+/**
+ * @brief
+ * // Checks to see whether or not a data value exists in the list
+ * // Returns true if the value exists in the SkipList.
+ * // Returns false otherwise
+ *
+ * @param data - integer that is going to be checked if in the skiplist
+ * @return true - if the integer is in the skiplist
+ * @return false - if the integer is not in the skiplist
+ */
 bool SkipList::contains(int data) const {
   SNode *temp = containsSNode(data);
   if (temp == nullptr) {

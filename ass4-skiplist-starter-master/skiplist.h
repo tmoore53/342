@@ -65,9 +65,10 @@ class SkipList {
   friend ostream &operator<<(ostream &out, const SkipList &skip);
 
 private:
-  // maximum number of levels
+  // maximum number of levels or depth of the linked list
   const int maxLevel = 1;
 
+  // Min and max vectors | MAX is rarly used
   vector<SNode *> iNT_MIN;
   vector<SNode *> iNT_MAX;
 
@@ -98,36 +99,35 @@ private:
    */
   void goHigher(SNode *a, int level);
 
-  // connect 2 nodes in a line
-  static void connect2AtLevel(SNode *a, SNode *b, int level);
-
-  // connect 3 nodes in a line
-  static void connect3AtLevel(SNode *a, SNode *b, SNode *c, int level);
-
+  /**
+   * @brief
+   * // This will return the pointer that has the node less than the value
+   * // The Node pointer must not be null pointer
+   * // If is the same value then it will return a nullptr
+   *
+   * @param minPointer - Pointer to compare the the value to
+   * @param value - targeted value that we want to return a node value before or
+   * at the targeted node
+   * @return SNode* - retuern the node with a value before, at, or null pointer
+   * if not found
+   */
   SNode *getPrevNode(SNode *&minPointer, int &value) const;
 
-  vector<SNode *> getBeforeNodes(int data) const;
-
-public:
+  /**
+   * @brief removes data in the skiplist
+   *
+   * @param data - desired integer to be removed
+   * @return true - if the integer was removed from the skiplist
+   * @return false - if the integer doesn't exists
+   */
   SNode *containsSNode(int data) const;
 
+public:
   // default SkipList has only 1 level, just one doubly-linked list
   explicit SkipList(int maxLevel = 1, int probability = 0);
 
   // destructor
   virtual ~SkipList();
-
-  // copy not allowed
-  SkipList(const SkipList &other) = delete;
-
-  // move not allowed
-  SkipList(SkipList &&other) = delete;
-
-  // assignment not allowed
-  SkipList &operator=(const SkipList &other) = delete;
-
-  // move assignment not allowed
-  SkipList &operator=(SkipList &&other) = delete;
 
   // return true if successfully added, no duplicates allowed
   bool add(int value);
@@ -142,24 +142,4 @@ public:
   bool contains(int data) const;
 };
 
-#endif // ASS4_SKIPLIST_H
-       //
-       /**
-        * @brief
-        *  What is the move method supposed to do and what does 2 "&&" do?
-        *
-        *  Are we given the output stream operator? Because it is commented out.
-        *  I just want to know if this could be a great tool to test my logic of the
-        *  code.
-        *
-        *  How should I think about calculating the height of the node?
-        *  Should it be length instead? or should we measure up and down?
-        *  Can I do:
-        *
-        *  For increase height is the intent to add empty Nodes?
-        *
-        *
-        *
-        *
-        *
-        */
+#endif
