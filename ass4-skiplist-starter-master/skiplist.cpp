@@ -100,10 +100,19 @@ bool SkipList::add(const vector<int> &values) {
   return result;
 }
 
+/**
+ * @brief This function adds a integer to a
+ *  skiplist
+ *
+ * the function is O(n)
+ *
+ * @param value
+ * @return true
+ * @return false
+ */
 bool SkipList::add(int value) {
-  if (this->contains(value))
-    return false;
-
+  // if (this->contains(value))
+  //   return false;
   SNode *newNode = new SNode(value);
 
   if (head == nullptr) {
@@ -118,7 +127,6 @@ bool SkipList::add(int value) {
     head = newNode;
     iNT_MIN[0] = head;
     goHigher(newNode, 1);
-
   } else {
     // Start at the head
     SNode *curr = iNT_MIN[0];
@@ -144,7 +152,13 @@ bool SkipList::add(int value) {
   return true;
 }
 
-/* Memory Leaks are occuring here! at the else if and the else */
+/**
+ * @brief This function determines if the integer will
+ *  go higher in the skip list and link them to the
+ *
+ * @param a
+ * @param level
+ */
 void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
     SNode *newptr = new SNode(a->value);
@@ -206,6 +220,9 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
   }
 }
 
+/**
+ * @brief Destroy the Skip List:: Skip List object
+ */
 SkipList::~SkipList() {
   // need to delete individual nodes
   for (int level{maxLevel - 1}; level >= 0; level--) {
@@ -231,7 +248,7 @@ SkipList::~SkipList() {
   head = nullptr;
 }
 
-// Remove has memory leaks
+// Remove has memory leaks when deleting
 // <<<<<---------------------------------------------------******************
 // fix this
 
@@ -251,6 +268,7 @@ bool SkipList::remove(int data) {
     delete temp;
     temp = tempUp;
     level++;
+    tempUp = nullptr;
   }
   if (temp->forward == nullptr && temp->backward == nullptr)
     iNT_MIN[level] = nullptr;
@@ -308,8 +326,6 @@ SNode *SkipList::containsSNode(int data) const {
       level--;
     }
   }
-  start = nullptr;
-
   start = nullptr;
   return nullptr;
 }

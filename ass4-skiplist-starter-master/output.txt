@@ -1,4 +1,4 @@
-Sun 21 Nov 2021 11:09:32 PM PST
+Mon 22 Nov 2021 12:22:33 AM PST
 Linux csslab11h 4.19.0-17-amd64 #1 SMP Debian 4.19.194-3 (2021-07-18) x86_64 GNU/Linux
 uid=1076553(tmoore53) gid=2121076553(tmoore53) groups=2121076553(tmoore53),605559(lab-access)
 =====================================================
@@ -7,25 +7,13 @@ uid=1076553(tmoore53) gid=2121076553(tmoore53) groups=2121076553(tmoore53),60555
 =====================================================
 2. Runs and produces correct output
 =====================================================
-0
-Level: 4 -- 
-Level: 3 -- 11, 
-Level: 2 -- 9, 11, 21, 
-Level: 1 -- 2, 7, 8, 9, 11, 21, 32, 45, 65, 
-Level: 0 -- -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 32, 45, 65, <-- Tail
-
-Level: 4 -- 
-Level: 3 -- 
-Level: 2 -- 9, 21, 
-Level: 1 -- 2, 7, 8, 9, 21, 32, 65, 
-Level: 0 -- -1, 1, 2, 4, 5, 6, 7, 8, 9, 12, 21, 32, 65, <-- Tail
-
 Level: 4 -- 9, 
 Level: 3 -- 9, 
 Level: 2 -- 5, 9, 
 Level: 1 -- 3, 5, 7, 9, 
 Level: 0 -- 1, 3, 5, 7, 9, <-- Tail
 
+7 ? true
 3 ? true
 -100 ? false
 100 ? false
@@ -36,6 +24,21 @@ Level: 1 -- 3, 7, 9,
 Level: 0 -- 1, 3, 7, 9, <-- Tail
 
 Test1 Done.
+Level: 4 -- 9, 
+Level: 3 -- 5, 8, 9, 21, 
+Level: 2 -- 4, 5, 8, 9, 21, 32, 45, 
+Level: 1 -- 4, 5, 8, 9, 11, 21, 32, 45, 
+Level: 0 -- -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 32, 45, 65, <-- Tail
+
+75 ? false
+7 ? false
+Level: 4 -- 9, 
+Level: 3 -- 5, 8, 9, 21, 
+Level: 2 -- 4, 5, 8, 9, 21, 32, 
+Level: 1 -- 4, 5, 8, 9, 21, 32, 
+Level: 0 -- -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 21, 32, 65, <-- Tail
+
+Test2 Done.
 Done.
 =====================================================
 3. clang-tidy warnings are fixed
@@ -51,315 +54,26 @@ Running clang-format on ./skiplist.cpp
 =====================================================
 6. No memory leaks using valgrind, look for "definitely lost" 
 =====================================================
-a.out: main.cpp:26: void test1(): Assertion `!result' failed.
-./create-output.sh: line 127: 145954 Aborted                 valgrind --log-file="valgrind-output.txt" $EXEC_PROGRAM > /dev/null > /dev/null
-==145954== Memcheck, a memory error detector
-==145954== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==145954== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
-==145954== Command: ./a.out
-==145954== Parent PID: 145841
-==145954== 
-==145954== Invalid read of size 4
-==145954==    at 0x10BF93: SkipList::containsSNode(int) const (skiplist.cpp:328)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b460 is 0 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BFF8: SkipList::containsSNode(int) const (skiplist.cpp:338)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b480 is 32 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 4
-==145954==    at 0x10BEEB: SkipList::containsSNode(int) const (skiplist.cpp:318)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b3f0 is 0 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BA90: SkipList::getPrevNode(SNode*, int&) const (skiplist.cpp:212)
-==145954==    by 0x10BF0A: SkipList::containsSNode(int) const (skiplist.cpp:319)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b3f8 is 8 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BA9D: SkipList::getPrevNode(SNode*, int&) const (skiplist.cpp:213)
-==145954==    by 0x10BF0A: SkipList::containsSNode(int) const (skiplist.cpp:319)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b3f8 is 8 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 4
-==145954==    at 0x10BF13: SkipList::containsSNode(int) const (skiplist.cpp:321)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b3f0 is 0 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BF24: SkipList::containsSNode(int) const (skiplist.cpp:322)
-==145954==    by 0x10BCCD: SkipList::remove(int) (skiplist.cpp:270)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b410 is 32 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD02: SkipList::remove(int) (skiplist.cpp:277)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b408 is 24 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD0F: SkipList::remove(int) (skiplist.cpp:279)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b400 is 16 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD17: SkipList::remove(int) (skiplist.cpp:279)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b3f8 is 8 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD23: SkipList::remove(int) (skiplist.cpp:281)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b408 is 24 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid free() / delete / delete[] / realloc()
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b3f0 is 0 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BD36: SkipList::remove(int) (skiplist.cpp:282)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B697: SkipList::add(int) (skiplist.cpp:137)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD49: SkipList::remove(int) (skiplist.cpp:286)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b4d8 is 8 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BE37: SkipList::remove(int) (skiplist.cpp:297)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD87: SkipList::remove(int) (skiplist.cpp:288)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b4d8 is 8 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BE37: SkipList::remove(int) (skiplist.cpp:297)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BD94: SkipList::remove(int) (skiplist.cpp:288)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b4e0 is 16 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BE37: SkipList::remove(int) (skiplist.cpp:297)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid read of size 8
-==145954==    at 0x10BDBC: SkipList::remove(int) (skiplist.cpp:289)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b4d8 is 8 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BE37: SkipList::remove(int) (skiplist.cpp:297)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== Invalid free() / delete / delete[] / realloc()
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BE37: SkipList::remove(int) (skiplist.cpp:297)
-==145954==    by 0x10A643: test1() (main.cpp:25)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Address 0x4d6b4d0 is 0 bytes inside a block of size 40 free'd
-==145954==    at 0x4836EAB: operator delete(void*) (vg_replace_malloc.c:576)
-==145954==    by 0x10BE37: SkipList::remove(int) (skiplist.cpp:297)
-==145954==    by 0x10A607: test1() (main.cpp:23)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954==  Block was alloc'd at
-==145954==    at 0x4835DEF: operator new(unsigned long) (vg_replace_malloc.c:334)
-==145954==    by 0x10B8A5: SkipList::goHigher(SNode*, int) (skiplist.cpp:181)
-==145954==    by 0x10B842: SkipList::add(int) (skiplist.cpp:171)
-==145954==    by 0x10A3E6: test1() (main.cpp:14)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== 
-==145954== Process terminating with default action of signal 6 (SIGABRT)
-==145954==    at 0x4BC87BB: raise (raise.c:51)
-==145954==    by 0x4BB3534: abort (abort.c:79)
-==145954==    by 0x4BB340E: __assert_fail_base.cold.0 (assert.c:92)
-==145954==    by 0x4BC1101: __assert_fail (assert.c:101)
-==145954==    by 0x10A670: test1() (main.cpp:26)
-==145954==    by 0x10A923: main (main.cpp:53)
-==145954== 
-==145954== HEAP SUMMARY:
-==145954==     in use at exit: 1,536 bytes in 36 blocks
-==145954==   total heap usage: 74 allocs, 41 frees, 79,571 bytes allocated
-==145954== 
-==145954== LEAK SUMMARY:
-==145954==    definitely lost: 0 bytes in 0 blocks
-==145954==    indirectly lost: 0 bytes in 0 blocks
-==145954==      possibly lost: 0 bytes in 0 blocks
-==145954==    still reachable: 1,536 bytes in 36 blocks
-==145954==         suppressed: 0 bytes in 0 blocks
-==145954== Rerun with --leak-check=full to see details of leaked memory
-==145954== 
-==145954== For counts of detected and suppressed errors, rerun with: -v
-==145954== ERROR SUMMARY: 23 errors from 17 contexts (suppressed: 0 from 0)
+==153984== Memcheck, a memory error detector
+==153984== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==153984== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==153984== Command: ./a.out
+==153984== Parent PID: 153863
+==153984== 
+==153984== 
+==153984== HEAP SUMMARY:
+==153984==     in use at exit: 0 bytes in 0 blocks
+==153984==   total heap usage: 79 allocs, 79 frees, 79,688 bytes allocated
+==153984== 
+==153984== All heap blocks were freed -- no leaks are possible
+==153984== 
+==153984== For counts of detected and suppressed errors, rerun with: -v
+==153984== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 =====================================================
 7. Tests have full code coverage
 =====================================================
 ./create-output.sh: line 134: ./check-code-coverage.sh: Permission denied
-Sun 21 Nov 2021 11:09:51 PM PST
+Mon 22 Nov 2021 12:23:10 AM PST
 =====================================================
 To create an output.txt file with all the output from this script
 Run the below command

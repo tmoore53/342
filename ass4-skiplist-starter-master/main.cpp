@@ -16,24 +16,26 @@ void test1() {
   // cannot add existing
   assert(!skp.add(vector<int>{1, 7}));
   cout << skp << endl;
-  // cout << "7 ? " << skp.contains(7) << endl;
+  cout << "7 ? " << skp.contains(7) << endl;
   cout << "3 ? " << skp.contains(3) << endl;
   cout << "-100 ? " << skp.contains(-100) << endl;
   cout << "100 ? " << skp.contains(100) << endl;
   bool result = skp.remove(5);
   assert(result);
-  result = skp.remove(5);
+  result = skp.remove(15);
   assert(!result);
   cout << skp << endl;
 
   cout << "Test1 Done." << endl;
 }
 
-int main() {
+void test2() {
+  // setting seed for easy testing
+  srand(10000);
+
   SkipList skp1(5, 50);
   skp1.add(
       vector<int>{1, 3, 4, 2, 7, -1, 9, 8, 6, 5, 1, 11, 21, 12, 32, 45, 65});
-  cout << skp1.containsSNode(75) << endl;
 
   skp1.add(4);
   skp1.add(3);
@@ -43,6 +45,8 @@ int main() {
   skp1.add(-1);
 
   cout << skp1 << endl;
+  cout << "75 ? " << skp1.contains(75) << endl;
+  cout << "7 ? " << skp1.contains(75) << endl;
 
   skp1.remove(11);
   skp1.remove(45);
@@ -50,7 +54,12 @@ int main() {
 
   cout << skp1 << endl;
 
+  cout << "Test2 Done." << endl;
+}
+
+int main() {
   test1();
+  test2();
 
   cout << "Done." << endl;
   return 0;
