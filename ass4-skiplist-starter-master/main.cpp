@@ -53,7 +53,13 @@ void test2() {
 
   skp1.remove(11);
   skp1.remove(45);
-  skp1.remove(3);
+  skp1.remove(4);
+  // skp1.remove(1);
+  // skp1.remove(4);
+  // skp1.remove(2);
+  // skp1.remove(11);
+  // skp1.remove(45);
+  // skp1.remove(3);
 
   cout << skp1 << endl;
 
