@@ -13,6 +13,14 @@
 
 using namespace std;
 
+/**
+ * @brief : Prints the levels of the every item in the
+ *  Skiplist
+ *
+ * @param Out : is the outstream
+ * @param SkipL : is the skiplist being called
+ * @return ostream&
+ */
 ostream &operator<<(ostream &Out, const SkipList &SkipL) {
   for (int level{SkipL.maxLevel - 1}; level >= 0; level--) {
 
@@ -40,30 +48,12 @@ SNode::SNode(int value)
     : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr},
       down{nullptr} {}
 
-// how many forward/backward pointers it has
-int SNode::height() const {
-  int height{0};
-  while (this->forward != nullptr) {
-    height++;
-  }
-  int height2{0};
-  while (this->backward != nullptr) {
-    height2++;
-  }
-  height = (height > height2) ? height : height2;
-
-  return height;
-}
-
-// increase the number of forward/backward pointers it has
-void SNode::increaseHeight() {}
-
-// array of Depth SNode* objects as FrontGuards linking levels
-SNode **FrontGuards;
-
-// array of Depth SNode* objects as RearGuards linking levels
-SNode **RearGuards;
-
+/**
+ * @brief Construct a new Skip List:: Skip List object
+ *
+ * @param maxLevel
+ * @param probability
+ */
 SkipList::SkipList(int maxLevel, int probability)
     : maxLevel{maxLevel}, probability{probability} {
   assert(maxLevel > 0 && probability >= 0 && probability < 100);
@@ -74,17 +64,31 @@ SkipList::SkipList(int maxLevel, int probability)
   // SNode *temp2 = new SNode(NULL);
 
   for (int level{maxLevel}; level > 0; level--) {
-
     iNT_MIN.push_back(nullptr);
-
     iNT_MAX.push_back(nullptr);
   }
 }
 
+/**
+ * @brief Creates the probabilty of the value in the first
+ *  level to go up or not
+ *
+ * @return true
+ * @return false
+ */
 bool SkipList::shouldInsertAtHigher() const {
   return rand() % 100 < probability;
 }
 
+/**
+ * @brief Adds one integer at a time in the given vector
+ *  Iterates through the vector and calls the
+ *  add function below
+ *
+ * @param values
+ * @return true
+ * @return false
+ */
 bool SkipList::add(const vector<int> &values) {
   bool result = values.size() > 0;
   if (!result)
@@ -97,8 +101,8 @@ bool SkipList::add(const vector<int> &values) {
 }
 
 bool SkipList::add(int value) {
-  // if (this->contains(value))
-  //   return false;
+  if (this->contains(value))
+    return false;
 
   SNode *newNode = new SNode(value);
 
