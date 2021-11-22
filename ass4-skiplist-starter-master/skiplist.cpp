@@ -257,10 +257,15 @@ SkipList::~SkipList() {
  */
 bool SkipList::remove(int data) {
   SNode *temp = containsSNode(data);
+
   if (temp == nullptr) {
     delete temp;
     temp = nullptr;
     return false;
+  }
+  if (temp->value == 3) {
+    cout << "temp = ";
+    cout << temp->value << endl;
   }
   int level = {0};
   while (temp->up != nullptr) {
@@ -273,14 +278,17 @@ bool SkipList::remove(int data) {
     if (temp->forward != nullptr) {
       temp->forward->backward = temp->backward;
     }
-    cout << "temp = ";
-    cout << temp->value << endl;
     SNode *tempUp = temp->up;
     delete temp;
     temp = tempUp;
     level++;
     tempUp = nullptr;
   }
+  // if (temp->value == 3) {
+  //   cout << "temp = ";
+  //   cout << temp->value << endl;
+  // }
+
   if (temp->forward == nullptr && temp->backward == nullptr)
     iNT_MIN[level] = nullptr;
   else if (temp->forward != nullptr && temp->backward == nullptr) {
@@ -290,6 +298,7 @@ bool SkipList::remove(int data) {
     temp->backward->forward = temp->forward;
   } else {
     temp->backward->forward = temp->forward;
+    temp->forward->backward = temp->backward;
   }
 
   delete temp;
@@ -303,35 +312,69 @@ bool SkipList::remove(int data) {
 SNode *SkipList::containsSNode(int data) const {
   int level = maxLevel - 1;
   SNode *start = iNT_MIN[level];
+  if (data == 3) {
+    cout << "============= ";
+    cout << "data == ";
+    cout << data << endl;
+  }
   // Start from the level that has the first value;
   while (start == nullptr && iNT_MIN[0] != nullptr) {
-    start = iNT_MIN[--level];
+    level--;
+    start = iNT_MIN[level];
+
+    if (start != nullptr && start->value == 3) {
+      cout << "starty = ";
+      cout << start->value << endl;
+    }
   }
   while (start != nullptr) {
     // If the value is less than the data that needs to be found then find
     // the value in the level that would be right before the desired value.
     if (start->value <= data) {
+      if (start != nullptr && start->value == 3) {
+        cout << "temp = ";
+        cout << start->value << endl;
+      }
       start = getPrevNode(start, data);
+      if (start != nullptr && start->value == 3) {
+        cout << "starting data == ";
+        cout << start->value << endl;
+        cout << "data == ";
+        cout << data << endl;
+      }
       // If we find the value you return the node in the lowest level
-      if (start->value == data) {
+      if (start != nullptr && start->value == data) {
         while (start->down != nullptr) {
           start = start->down;
         }
         return start;
       }
     } else if (start->value >= data && start != iNT_MIN[level]) {
-      while (start != nullptr && level >= 0 && start->value > data &&
+      while (start->backward != nullptr && start->value > data &&
              start != iNT_MIN[level]) {
         start = start->backward;
       }
+      if (start != nullptr && start->value == 3) {
+        cout << "temperature = ";
+        cout << start->value << endl;
+      }
+    }
+    if (start != nullptr && start->value == 3) {
+      cout << "temperatureeeeee = ";
+      cout << start->value << endl;
     }
 
     if (start == nullptr)
       return nullptr;
 
-    if (start != nullptr) {
+    if (start->down != nullptr && start->value == data) {
+
       start = start->down;
       level--;
+    }
+    if (start != nullptr && start->value == 3) {
+      cout << "temp = ";
+      cout << start->value << endl;
     }
   }
   start = nullptr;
