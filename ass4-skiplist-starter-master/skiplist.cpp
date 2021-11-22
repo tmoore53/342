@@ -35,40 +35,6 @@ ostream &operator<<(ostream &Out, const SkipList &SkipL) {
   return Out;
 }
 
-/*
-  // This was previously provided
-// I had to change it from above.
-
-  for (int Index = SkipL.Depth - 1; Index >= 0; Index--) {
-    Out << "Level: " + to_string(Index) + " -- ";
-    SkipList::SNode* Curr = SkipL.FrontGuards[Index];
-    while(Curr != nullptr) {
-      Out<< to_string(Curr->Data) + ", ";
-      Curr = Curr->Next;
-    }
-    Out << "\n";
-  }
-  return Out;
-
-
-ostream &operator<<(ostream &out, const SkipList &skip) {
-  for (int d = skip.maxLevel - 1; d >= 0; d--) {
-    out << d << ": ";
-    auto *curr = skip.head->forward[d];
-    if (curr != skip.tail) {
-      out << curr->value;
-      curr = curr->forward[d];
-    }
-    while (curr != nullptr && curr != skip.tail) {
-      out << "-->" << curr->value;
-      curr = curr->forward[d];
-    }
-    out << endl;
-  }
-  return out;
-}
-*/
-
 // Skiplist Node Constructor
 SNode::SNode(int value)
     : value{value}, forward{nullptr}, backward{nullptr}, up{nullptr},
@@ -140,7 +106,6 @@ bool SkipList::add(int value) {
     head = newNode;
     tail = head;
     iNT_MIN[0] = head;
-    iNT_MAX[0] = head;
     goHigher(newNode, 1);
 
   } else if (head->value > value) {
@@ -211,7 +176,7 @@ void SkipList::goHigher(SNode *a, int level) {
 // This will return the pointer that has the node less than the value
 // The Node pointer must not be null pointer
 // If is the same value then it will return a nullptr
-SNode *SkipList::getPrevNode(SNode *minPointer, int &value) const {
+SNode *SkipList::getPrevNode(SNode *&minPointer, int &value) const {
   while (minPointer->forward != nullptr &&
          minPointer->forward->value <= value) {
     minPointer = minPointer->forward;
@@ -237,7 +202,6 @@ void SkipList::addBefore(SNode *NewNode, SNode *PrevNode) {
   // gets pointed to the new node
   if (NewNode->value > tail->value) {
     tail = NewNode;
-    iNT_MAX[0] = tail;
   }
 }
 
@@ -257,6 +221,7 @@ SkipList::~SkipList() {
       curr = nullptr;
     }
   }
+
   this->iNT_MAX.clear();
   iNT_MAX.shrink_to_fit();
   this->iNT_MIN.clear();
@@ -271,8 +236,11 @@ SkipList::~SkipList() {
 
 bool SkipList::remove(int data) {
   SNode *temp = containsSNode(data);
-  if (temp == nullptr)
+  if (temp == nullptr) {
+    delete temp;
+    temp = nullptr;
     return false;
+  }
   int level = {0};
   while (temp->up != nullptr) {
 
@@ -340,13 +308,13 @@ SNode *SkipList::containsSNode(int data) const {
     }
   }
 
+  start = nullptr;
   return nullptr;
 }
 
 // Checks to see whether or not a data value exists in the list
 // Returns true if the value exists in the SkipList.
 // Returns false otherwise
-
 bool SkipList::contains(int data) const {
   SNode *temp = containsSNode(data);
   if (temp == nullptr) {
@@ -354,10 +322,3 @@ bool SkipList::contains(int data) const {
   }
   return temp->value == data;
 }
-
-// private methods to ease linking
-// void SkipList::connect2AtLevel(SNode *a, SNode *b, int level) {
-
-// }
-
-// void SkipList::connect3AtLevel(SNode *a, SNode *b, SNode *c, int level) {}

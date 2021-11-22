@@ -97,7 +97,7 @@ private:
   // connect 3 nodes in a line
   static void connect3AtLevel(SNode *a, SNode *b, SNode *c, int level);
 
-  SNode *getPrevNode(SNode *minPointer, int &value) const;
+  SNode *getPrevNode(SNode *&minPointer, int &value) const;
 
   vector<SNode *> getBeforeNodes(int data) const;
 
