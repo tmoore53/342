@@ -264,13 +264,17 @@ bool SkipList::remove(int data) {
   }
   int level = {0};
   while (temp->up != nullptr) {
-
-    temp->backward->forward = temp->forward;
+    if (temp->backward != nullptr) {
+      temp->backward->forward = temp->forward;
+    } else {
+      iNT_MIN[level] = temp->forward;
+    }
 
     if (temp->forward != nullptr) {
       temp->forward->backward = temp->backward;
     }
-
+    cout << "temp = ";
+    cout << temp->value << endl;
     SNode *tempUp = temp->up;
     delete temp;
     temp = tempUp;
