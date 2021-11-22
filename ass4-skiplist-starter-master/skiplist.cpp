@@ -136,14 +136,14 @@ bool SkipList::add(int value) {
 
   SNode *newNode = new SNode(value);
 
-  if (iNT_MIN[0] == nullptr) {
+  if (head == nullptr) {
     head = newNode;
     tail = head;
     iNT_MIN[0] = head;
     iNT_MAX[0] = head;
     goHigher(newNode, 1);
 
-  } else if (iNT_MIN[0]->value > value) {
+  } else if (head->value > value) {
     newNode->forward = head;
     newNode->forward->backward = newNode;
     head = newNode;
@@ -184,25 +184,21 @@ void SkipList::goHigher(SNode *&a, int level) {
       iNT_MAX[level] = newptr;
       a->up = newptr;
       newptr->down = a;
-      a = newptr;
     } else if (iNT_MIN[level]->value > newptr->value) {
       newptr->forward = iNT_MIN[level];
       iNT_MIN[level]->backward = newptr;
       iNT_MIN[level] = newptr;
       a->up = newptr;
       newptr->down = a;
-      a = newptr;
     } else {
       SNode *curr = iNT_MIN[level];
       curr = getPrevNode(curr, a->value);
       // If it returns a null pointer then there was a
       // repeat of numbers trying to be entered
-
       addBefore(newptr, curr);
       a->up = newptr;
       newptr->down = a;
       a = a->up;
-      a = newptr;
     }
     level++;
   }
@@ -315,17 +311,12 @@ SNode *SkipList::containsSNode(int data) const {
   while (start != nullptr) {
     // If the value is less than the data that needs to be found then find
     // the value in the level that would be right before the desired value.
-    if (start != nullptr && data == 3)
-      cout << "We reached this point where level, and start  =" << level << ", "
-           << start->value << endl;
-
     if (start->value <= data) {
       start = getPrevNode(start, data);
       // If we find the value you return the node in the lowest level
       if (start->value == data) {
         while (start->down != nullptr) {
           start = start->down;
-          level--;
         }
         return start;
       }
