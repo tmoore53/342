@@ -180,30 +180,27 @@ void SkipList::goHigher(SNode *a, int level) {
   while (shouldInsertAtHigher() && level < maxLevel) {
     SNode *newptr = new SNode(a->value);
     if (iNT_MIN[level] == nullptr) {
-      iNT_MIN[level] = newptr;
-      iNT_MAX[level] = newptr;
-      a->up = newptr;
-      newptr->down = a;
-      a = a->up;
-
+      iNT_MIN[level] = newptr; // link the new node to be the minimum
+      iNT_MAX[level] = newptr; // Linke th new node to the max
+      a->up = newptr;          // link the node below to the new node above
+      newptr->down = a;        // linke the node above to the node below
     } else if (iNT_MIN[level]->value > newptr->value) {
-      newptr->forward = iNT_MIN[level];
-      iNT_MIN[level]->backward = newptr;
-      iNT_MIN[level] = newptr;
-      a->up = newptr;
-      newptr->down = a;
-      a = a->up;
-
+      newptr->forward = iNT_MIN[level];  // link new node to first node in row
+      iNT_MIN[level]->backward = newptr; // link first node in row to new node
+      iNT_MIN[level] = newptr; // link the first node in the row to be new node
+      a->up = newptr;          // link the node below to the new node above
+      newptr->down = a;        // linke the node above to the node below
     } else {
-      SNode *curr = iNT_MIN[level];
-      curr = getPrevNode(curr, a->value);
+      SNode *curr =
+          iNT_MIN[level]; // get the first value on current level that we are on
+      curr = getPrevNode(curr, a->value); // get the value
       // If it returns a null pointer then there was a
       // repeat of numbers trying to be entered
       addBefore(newptr, curr);
       a->up = newptr;
       newptr->down = a;
-      a = a->up;
     }
+    a = a->up;
     level++;
   }
 }
@@ -271,8 +268,11 @@ SkipList::~SkipList() {
 
 bool SkipList::remove(int data) {
   SNode *temp = containsSNode(data);
-  if (temp == nullptr)
+  if (temp == nullptr) {
+    delete temp;
+    temp = nullptr;
     return false;
+  }
   int level = {0};
   while (temp->up != nullptr) {
 
@@ -339,6 +339,7 @@ SNode *SkipList::containsSNode(int data) const {
       level--;
     }
   }
+  start = nullptr;
 
   return nullptr;
 }
