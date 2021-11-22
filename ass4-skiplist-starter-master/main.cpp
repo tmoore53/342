@@ -67,7 +67,7 @@ void test2() {
 }
 
 int main() {
-  // test1();
+  test1();
   test2();
 
   cout << "Done." << endl;

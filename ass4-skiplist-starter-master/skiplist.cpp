@@ -331,17 +331,7 @@ SNode *SkipList::containsSNode(int data) const {
     // If the value is less than the data that needs to be found then find
     // the value in the level that would be right before the desired value.
     if (start->value <= data) {
-      if (start != nullptr && start->value == 3) {
-        cout << "temp = ";
-        cout << start->value << endl;
-      }
       start = getPrevNode(start, data);
-      if (start != nullptr && start->value == 3) {
-        cout << "starting data == ";
-        cout << start->value << endl;
-        cout << "data == ";
-        cout << data << endl;
-      }
       // If we find the value you return the node in the lowest level
       if (start != nullptr && start->value == data) {
         while (start->down != nullptr) {
@@ -354,27 +344,17 @@ SNode *SkipList::containsSNode(int data) const {
              start != iNT_MIN[level]) {
         start = start->backward;
       }
-      if (start != nullptr && start->value == 3) {
-        cout << "temperature = ";
-        cout << start->value << endl;
-      }
     }
-    if (start != nullptr && start->value == 3) {
-      cout << "temperatureeeeee = ";
-      cout << start->value << endl;
-    }
+    if (start != nullptr && start->down == nullptr && start->value == data)
+      return start;
 
     if (start == nullptr)
       return nullptr;
 
-    if (start->down != nullptr && start->value == data) {
+    if (start != nullptr) {
 
       start = start->down;
       level--;
-    }
-    if (start != nullptr && start->value == 3) {
-      cout << "temp = ";
-      cout << start->value << endl;
     }
   }
   start = nullptr;
